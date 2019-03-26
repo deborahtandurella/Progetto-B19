@@ -11,7 +11,17 @@ public class Main {
 		//Inizializzo un nuovo server
 		//NB: all'avvio del programma bisogna passare 3 argomenti (porta, host, numero massimo clients)
 		//TODO: magari trovare una soluzione migliore anzichè passarlo come argomento del programma
-		s = new Server(Integer.parseInt(args[0]),args[1],Integer.parseInt(args[2]));
+
+
+		byte[] host = new byte[4];
+
+		host[0] = Byte.valueOf(args[1]);
+		host[1] = Byte.valueOf(args[2]);
+		host[2] = Byte.valueOf(args[3]);
+		host[3] = Byte.valueOf(args[4]);
+
+
+		s = new Server(Integer.parseInt(args[0]),host,Integer.parseInt(args[2]));
 
 		s.start();
 

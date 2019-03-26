@@ -13,7 +13,7 @@ public class DummyClient {
         BufferedReader b = new BufferedReader(new InputStreamReader(s.getInputStream()));
         while (true){
             System.out.println(b.readLine());
-            System.out.println("Non sto leggendo un cazzo");
+            System.out.println("Non sto leggendo niente");
         }
     }
 }

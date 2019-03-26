@@ -29,7 +29,6 @@ public class TunnelClient extends Thread {
 		out = null;
 
 
-
 	}
 
 	@Override
@@ -39,8 +38,7 @@ public class TunnelClient extends Thread {
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			//Inizializzo flusso di dati in output partendo dal flusso di output del socket
 			out = new PrintWriter(client.getOutputStream());
-			out.write("Hello porco due\n");
-			out.flush();
+
 
 			//System.out.println("Sto scrivendo");
 		}catch (Exception e){
@@ -51,18 +49,8 @@ public class TunnelClient extends Thread {
 		//Ciclo di polling dell'input
 		while (true){
 			try	{
-				//Leggo intera riga
-				//String line = in.readLine();
-				out.write("Hello porco 3\n");
-				out.flush();
-				//System.out.println("Sto scrivendo");
-				//Se la riga è il testo ESCI allora chiudo connessione
 				//TODO: se il sistema di comandi è approvato allora implementare comandi (classe per comandi?)
-				/*if(line == "ESCI"){
-					//Chiudo socket
-					client.close();
-					return;
-				}*/
+
 			}catch (Exception e){
 				System.err.println(e.getMessage());
 			}

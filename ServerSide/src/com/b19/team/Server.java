@@ -1,7 +1,10 @@
+package com.b19.team;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Classe server che gestisce la connessione "fisica" a basso livello del programma
@@ -20,6 +23,8 @@ public class Server extends Thread {
 	//Socket per il server
 	private ServerSocket server;
 
+	private ArrayList<TunnelClient> clients;
+
 	/**
 	 * Costruttore della classe
 	 * @param p porta su cui inizializzare il server
@@ -32,6 +37,7 @@ public class Server extends Thread {
 		this.port = p;
 		this.host = h;
 		this.maxClients = maxC;
+		this.clients = new ArrayList<>();
 
 		try {
 			//Inizializzo socket effettivo del server passando la porta, il numero di client massimi, e creando con il Wrapper InetAddress un
@@ -45,6 +51,7 @@ public class Server extends Thread {
 
 	@Override
 	public void run() {
+		System.out.println("Server listening on port " + port);
 		//Ciclo di polling delle connessioni del client
 		while (true){
 			try {
@@ -52,6 +59,8 @@ public class Server extends Thread {
 				Socket client = server.accept();
 				TunnelClient tunnel = new TunnelClient(client);
 				tunnel.start();
+				System.out.println("Connesso " + client.getInetAddress());
+				clients.add(tunnel);
 
 			} catch (IOException e) {
 				//Se ho eccezione allora stampo il messaggio di errore sul System error

@@ -1,3 +1,5 @@
+package com.b19.team;
+
 //NB classe tester non necessaria javadoc
 public class Main {
 

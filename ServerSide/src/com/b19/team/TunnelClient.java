@@ -1,6 +1,9 @@
+package com.b19.team;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 
@@ -11,6 +14,8 @@ import java.net.Socket;
 
 public class TunnelClient extends Thread {
 	private Socket client;
+	private BufferedReader in;
+	private PrintWriter out;
 
 	/**
 	 * Costruttore per crare un tunnel di flussi privato tra client e server
@@ -20,38 +25,46 @@ public class TunnelClient extends Thread {
 		//Inizializzo client dell'istanza con il client passato come parametro
 		this.client = client;
 
+		in = null;
+		out = null;
+
+
+
 	}
 
 	@Override
 	public void run() {
-		BufferedReader in = null;
-		DataOutputStream out = null;
-
 		try {
 			//Inizializzo flusso di dati in input partendo dal flusso di input del socket
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			//Inizializzo flusso di dati in output partendo dal flusso di output del socket
-			out = new DataOutputStream(client.getOutputStream());
+			out = new PrintWriter(client.getOutputStream());
+			out.write("Hello porco due\n");
+			out.flush();
+
+			//System.out.println("Sto scrivendo");
 		}catch (Exception e){
 			//Se ho eccezione stampo messaggio sul system error
 			System.err.println(e.getMessage());
-			return;
 		}
 
 		//Ciclo di polling dell'input
 		while (true){
 			try	{
 				//Leggo intera riga
-				String line = in.readLine();
+				//String line = in.readLine();
+				out.write("Hello porco 3\n");
+				out.flush();
+				//System.out.println("Sto scrivendo");
 				//Se la riga è il testo ESCI allora chiudo connessione
 				//TODO: se il sistema di comandi è approvato allora implementare comandi (classe per comandi?)
-				if(line == "ESCI"){
+				/*if(line == "ESCI"){
 					//Chiudo socket
 					client.close();
 					return;
-				}
+				}*/
 			}catch (Exception e){
-
+				System.err.println(e.getMessage());
 			}
 		}
 

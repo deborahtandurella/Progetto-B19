@@ -1,0 +1,2 @@
+public class MenuStage {
+}

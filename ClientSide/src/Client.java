@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.*;
+import java.io.*;
+import java.net.*;
 
 public class Client extends Thread {
     BufferedReader in = null;
@@ -24,8 +27,10 @@ public class Client extends Thread {
     }
 
     public String chiamata(){
-        b = tastiera.nextInt();
+        int b = 0;
         String s = null;
+        do {
+        b = tastiera.nextInt();
         switch (b){
             case 1: s = "Ambo";
                 break;
@@ -37,7 +42,8 @@ public class Client extends Thread {
                 break;
             case 5: s = "Tombola";
                 break;
-        }
+            }
+        } while(b != 5);  //il problema è che stampa solo tombola ovviamente
         return s;
     }
 

@@ -8,6 +8,6 @@
 * Oprea Anca	     	: Documentazione dei requisiti
 * Montebugnoli Leonardo : Qualità del codice
 
-##Requirements
+## Requirements
 
 Per poter aprire i file di progetto .zargo scaricare ArgoUML : http://argouml-downloads.tigris.org/argouml-0.34/

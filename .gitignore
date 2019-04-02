@@ -1,12 +1,10 @@
 #Intellij files
-./ServerSide/*.iws
-./ServerSide/*.iml
-./ServerSide/*.ipr
-./ServerSide/out/*
-./ClientSide/*.iws
-./ClientSide/*.iml
-./ClientSide/*.ipr
-./ClientSide/out/*
+*.iws
+*.iml
+*.ipr
+*.iws
+*.iml
+*.ipr
 # Compiled class file
 *.class
 

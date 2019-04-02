@@ -2,9 +2,7 @@
 *.iws
 *.iml
 *.ipr
-*.iws
-*.iml
-*.ipr
+
 # Compiled class file
 *.class
 

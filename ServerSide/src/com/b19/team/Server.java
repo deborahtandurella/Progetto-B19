@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 public class Server extends Thread {
 
+	public static int readyPlayer = 0;
+	private static int maxPlayers = 10;
+	private static boolean acceptPlayers = true;
 	//Variabili interne di gestione
 	//Porta per connessione TCP
 	private int port;
@@ -21,7 +24,7 @@ public class Server extends Thread {
 	//Socket per il server
 	private ServerSocket server;
 
-	private ArrayList<TunnelClient> clients;
+	private ArrayList<Player> players;
 
 	/**
 	 * Costruttore della classe
@@ -34,7 +37,7 @@ public class Server extends Thread {
 		//Inizializzo le variabili con i valori passati dal costruttore
 		this.port = p;
 		this.maxClients = maxC;
-		this.clients = new ArrayList<>();
+		this.players = new ArrayList<>();
 
 		try {
 			//Inizializzo socket effettivo del server passando la porta, il numero di client massimi, e creando con il Wrapper InetAddress un
@@ -46,23 +49,61 @@ public class Server extends Thread {
 		}
 	}
 
+
+	/**
+	 * Metodo statico che serve per notificare che un nuovo player attivo è stato aggiunto
+	 * @return ritorna true se andato tutto bene altrimenti ritorna false se ho raggiunto il limite
+	 */
+	public static boolean addReadyPlayer() {
+		if(readyPlayer>=maxPlayers){
+			return false;
+		}
+		readyPlayer++;
+		if(readyPlayer==maxPlayers){
+			acceptPlayers = false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public void run() {
 		System.out.println("Server listening on port " + port);
 		//Ciclo di polling delle connessioni del client
-		while (true){
-			try {
-				//Polling di accettazione dei clients
-				Socket client = server.accept();
-				TunnelClient tunnel = new TunnelClient(client);
-				tunnel.start();
-				System.out.println("Connesso " + client.getInetAddress());
-				clients.add(tunnel);
+		while (true) {
 
-			} catch (IOException e) {
-				//Se ho eccezione allora stampo il messaggio di errore sul System error
-				System.err.println(e.getMessage());
+			//Controllo se posso accettare i players
+			if (acceptPlayers) {
+				try {
+					//Polling di accettazione dei clients
+					Socket client = server.accept();
+
+					//Creo nuovo player
+					Player p = new Player(new TunnelClient(client));
+
+					//Loggo la connessione
+					System.out.println("Connesso " + client.getInetAddress());
+
+					players.add(p);
+
+				} catch (IOException e) {
+					//Se ho eccezione allora stampo il messaggio di errore sul System error
+					System.err.println(e.getMessage());
+				}
+			}else{
+				//TODO: Start the game
 			}
 		}
 	}
+
+	/**
+	 * Questo metodo invia un messaggio in broadcast a tutti i player connessi
+	 * @param message messaggio da inviare
+	 */
+	public void sendBroadcastPacket(String message){
+		for(Player p: players){
+			p.getPhysicalLink().sendPacket(message);
+		}
+	}
+
 }

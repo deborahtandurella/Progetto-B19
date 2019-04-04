@@ -49,12 +49,46 @@ public class TunnelClient extends Thread {
 		//Ciclo di polling dell'input
 		while (true){
 			try	{
-				//TODO: se il sistema di comandi è approvato allora implementare comandi (classe per comandi?)
-
+				//Ricevo pacchetto e lo gestisco
+				receivePacket(in.readLine());
 			}catch (Exception e){
 				System.err.println(e.getMessage());
 			}
 		}
 
+	}
+
+	/**
+	 * Metodo che gestisce la comunicazione in uscita
+	 * @param message messaggio da inviare
+	 */
+
+	public void sendPacket(String message){
+		out.println(message);
+		out.flush();
+	}
+
+	/**
+	 * Metodo che gestisce la comunicazione in entrata
+	 * @param message messaggio ricevuto
+	 */
+	private void receivePacket(String message){
+		//TODO gestione comandi
+
+
+
+	}
+
+	/**
+	 * Questo metodo, se chiamato, chiude la connessione con il socket client
+	 */
+	public void close() {
+		try {
+			in.close();
+			out.close();
+			client.close();
+		}catch (Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 }

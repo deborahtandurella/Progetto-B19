@@ -11,7 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/ClientSide.iml" filepath="$PROJECT_DIR$/ClientSide.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11.0.2" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="VcsDirectoryMappings">
@@ -20,14 +20,17 @@
   <component name="libraryTable">
     <library name="lib">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/JAVAFX/lib" />
+        <root url="file://$USER_HOME$/Documenti/javafx-sdk-11.0.2/lib" />
       </CLASSES>
       <JAVADOC />
+      <NATIVE>
+        <root url="file://$USER_HOME$/Documenti/javafx-sdk-11.0.2/lib" />
+      </NATIVE>
       <SOURCES>
-        <root url="file://$PROJECT_DIR$/lib/JAVAFX/lib" />
+        <root url="file://$USER_HOME$/Documenti/javafx-sdk-11.0.2/lib" />
       </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/lib/JAVAFX/lib" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/JAVAFX/lib" recursive="false" type="SOURCES" />
+      <jarDirectory url="file://$USER_HOME$/Documenti/javafx-sdk-11.0.2/lib" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documenti/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
     </library>
   </component>
 </project>

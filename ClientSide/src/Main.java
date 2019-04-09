@@ -7,17 +7,17 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        /**Client client =  new Client();
+       /* Client client =  new Client();
 
-        client.avviaClient();*/
+        client.avviaClient(); */
+
+
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuStage.fxml"));
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("MenuStage.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

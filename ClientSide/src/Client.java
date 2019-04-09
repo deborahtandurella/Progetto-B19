@@ -29,7 +29,7 @@ public class Client extends Thread {
     public String chiamata(){
         int b = 0;
         String s = null;
-        do {
+
         b = tastiera.nextInt();
         switch (b){
             case 1: s = "Ambo";
@@ -43,7 +43,7 @@ public class Client extends Thread {
             case 5: s = "Tombola";
                 break;
             }
-        } while(b != 5);  //il problema è che stampa solo tombola ovviamente
+         //il problema è che non è completamente funzionante
         return s;
     }
 

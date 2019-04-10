@@ -34,14 +34,12 @@ public class MenuController {
 
         //metodo che cambia la scena
         Parent cartellaParent = FXMLLoader.load(getClass().getResource("Cartella.fxml"));
-        Object eventSource = event.getSource();
-        Node sourceAsNode = (Node)eventSource ;
-        Scene oldScene = sourceAsNode.getScene();
-        Window window = oldScene.getWindow();
-        Stage stage = (Stage) window ;
+
         Scene scene = new Scene(cartellaParent);
+
+        Stage stage = (Stage) BTN_PLAY.getScene().getWindow();
         stage.setScene(scene);
-        stage.show();
+
     }
 
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="cartellaAnchor" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CartellaController">
+<AnchorPane id="cartellaAnchor" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GUI.controllers.CartellaController">
    <children>
       <Pane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
          <children>

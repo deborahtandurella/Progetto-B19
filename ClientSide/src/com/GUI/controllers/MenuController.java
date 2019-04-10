@@ -1,3 +1,6 @@
+package com.GUI.controllers;
+
+import com.Game.controllers.PlayerController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -5,23 +8,15 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MenuController {
 
@@ -43,7 +38,7 @@ public class MenuController {
         PlayerController.startGame(txt_username.getText());
 
         //metodo che cambia la scena
-        Parent cartellaParent = FXMLLoader.load(getClass().getResource("Cartella.fxml"));
+        Parent cartellaParent = FXMLLoader.load(getClass().getResource("../../../resources/Cartella.fxml"));
 
         AnchorPane next = (AnchorPane) cartellaParent;
 

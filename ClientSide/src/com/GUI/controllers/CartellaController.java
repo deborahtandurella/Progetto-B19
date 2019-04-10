@@ -1,5 +1,9 @@
+package com.GUI.controllers;
+
+import com.Game.controllers.PlayerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+
 
 public class CartellaController {
 

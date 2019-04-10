@@ -1,3 +1,5 @@
+package com.Game;
+
 import java.awt.*;
 
 public class LogicPlayer {

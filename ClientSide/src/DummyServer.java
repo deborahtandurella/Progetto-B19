@@ -16,6 +16,7 @@ public class DummyServer extends Thread{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream());
 
+            while(true)
             System.out.println(in.readLine());
 
 

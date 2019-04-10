@@ -8,6 +8,7 @@ public class Client extends Thread {
     PrintStream out = null;
     Socket socket = null;
     Scanner tastiera = new Scanner(System.in);
+    Boolean inGame = false;
 
     public void avviaClient() {
         try {
@@ -16,35 +17,55 @@ public class Client extends Thread {
             in = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
             out = new PrintStream(socket.getOutputStream(), true);
+            inGame = true;
 // Legge dal serer
-            out.println(chiamata());
-            out.flush();
-            out.close();
-            in.close();
+            /* while(inGame){
+                out.println(chiamata());
+                out.flush();
+                out.close();
+                in.close();
+            } */
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public String chiamata(){
-        int b = 0;
-        String s = null;
+    public void chiamata(int i){
 
-        b = tastiera.nextInt();
-        switch (b){
-            case 1: s = "Ambo";
-                break;
-            case 2: s = "Terno";
-                break;
-            case 3: s = "Quaterna";
-                break;
-            case 4: s = "Cinquina";
-                break;
-            case 5: s = "Tombola";
-                break;
+     try {
+         String s = null;
+
+         switch (i) {
+             case 1:
+                 s = "Ambo";
+                 break;
+             case 2:
+                 s = "Terno";
+                 break;
+             case 3:
+                 s = "Quaterna";
+                 break;
+             case 4:
+                 s = "Cinquina";
+                 break;
+             case 5:
+                 s = "Tombola";
+                 inGame = false;
+                 break;
+         }
+
+         out.println(s);
+         out.flush();
+
+            if(!inGame) {
+             out.close();
+             in.close();
             }
-         //il problema è che non è completamente funzionante
-        return s;
+     }catch (Exception e){
+         System.out.println(e.getMessage());
+     }
+
     }
+
 
 }

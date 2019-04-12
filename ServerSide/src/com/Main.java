@@ -1,4 +1,6 @@
-package com.b19.team;
+package com;
+
+import com.physical.Server;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

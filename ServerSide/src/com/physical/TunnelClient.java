@@ -1,9 +1,9 @@
-package com.b19.team;
+package com.physical;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import com.logic.Player;
+import com.logic.Tomboliere;
+
+import java.io.*;
 import java.net.Socket;
 
 
@@ -16,15 +16,17 @@ public class TunnelClient extends Thread {
 	private Socket client;
 	private BufferedReader in;
 	private PrintWriter out;
+	private Player player;
+
 
 	/**
 	 * Costruttore per crare un tunnel di flussi privato tra client e server
 	 */
-	public TunnelClient(Socket client) {
+	public TunnelClient(Socket client, Player player) {
 		super();
 		//Inizializzo client dell'istanza con il client passato come parametro
 		this.client = client;
-
+		this.player = player;
 		in = null;
 		out = null;
 
@@ -75,8 +77,29 @@ public class TunnelClient extends Thread {
 	private void receivePacket(String message){
 		//TODO gestione comandi
 
-
-
+		//Se il comando è NUEMERO_CARTELLE allora prendo il numero di cartelle (es. NUMERO_CARTELLE 3 => n = 3)
+		if(message.startsWith("NUMERO_CARTELLE ")){
+			if(player.getUsername() != null){
+				int n = message.charAt(16);
+				if(n > 0){
+					player.setNumeroCartelle(n);
+				}
+			}
+			return;
+		}
+		//Se il comando è USERNAME prendo l'username del player (es. USERNAME ciao => username = ciao)
+		if(message.startsWith("USERNAME ")){
+			String username = message.split("\\s+")[1];
+			if(!username.equals("") && username != null){
+				if(!player.setUsername(username)){
+					try {
+						client.close();
+					} catch (IOException e) {
+						System.err.println(e.getMessage());
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -89,6 +112,29 @@ public class TunnelClient extends Thread {
 			client.close();
 		}catch (Exception e){
 			System.err.println(e.getMessage());
+		}
+	}
+
+
+	/**
+	 * Metodo che genera N cartelle per il player associato a questo tunnel
+	 */
+	public void generateCartelle() {
+		for (int i = 0; i < player.getNumeroCartelle(); i++) {
+			player.addCartella(Tomboliere.generaCartella());
+		}
+	}
+
+	/**
+	 * Metodo che notifica al client le sue cartelle
+	 */
+	public void notificaCartelle() {
+		for (int i = 0; i < player.getNumeroCartelle(); i++) {
+			String message = player.CartellaToString(i);
+
+			message = "CARTELLA " + message;
+
+			sendPacket(message);
 		}
 	}
 }

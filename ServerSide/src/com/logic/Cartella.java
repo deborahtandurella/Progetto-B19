@@ -1,14 +1,31 @@
-package com.b19.team;
+package com.logic;
 
 public class Cartella {
 
-    private int[][] numeri;
+    private Integer[] numeri;
 
-    public Cartella(int[][] numeri) {
+    public Cartella(Integer[] numeri) {
         this.numeri = numeri;
     }
 
-    public int[][] getNumeri() {
+    /**
+     * Getter dei numeri della cartella
+     * @return ritorna l'array contenente i numeri della cartella
+     */
+    public Integer[] getNumeri() {
         return numeri;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < numeri.length; i++) {
+            sb.append(numeri[i]+",");
+        }
+
+        sb.deleteCharAt(sb.toString().length()-1);
+
+        return sb.toString();
     }
 }

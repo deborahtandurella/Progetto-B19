@@ -1,4 +1,4 @@
-package com.b19.team;
+package com.logic;
 
 /**
  * Questo enum gestisce lo stato del giocatore, IDLE significa che il giocatore è connesso ma non ha inviato un username

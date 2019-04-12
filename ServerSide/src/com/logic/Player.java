@@ -1,23 +1,27 @@
-package com.b19.team;
+package com.logic;
+
+import com.physical.Server;
+import com.physical.TunnelClient;
+
+import java.util.ArrayList;
 
 /**
  * Questa classe gestisce l'entità del giocatore unificando la parte logica con quella "fisica" del collegamento
  */
 public class Player {
 
-	private TunnelClient physicalLink;
 	private String username;
 	private PlayerState state;
+	private ArrayList<Cartella> cartelle;
+	private int n;
 
 	/**
 	 * Costruttore della classe
-	 * @param physicalLink il tunnel client corrispondente per il giocatore
 	 */
-	public Player(TunnelClient physicalLink) {
-		this.physicalLink = physicalLink;
-
-		this.physicalLink.start();
+	public Player() {
+		cartelle = new ArrayList<>();
 		state = PlayerState.IDLE;
+		username = null;
 	}
 
 	/**
@@ -32,13 +36,14 @@ public class Player {
 	 * Metodo setter dell'username
 	 * @param username username da settare
 	 */
-	public void setUsername(String username) {
+	public boolean setUsername(String username) {
 		this.username = username;
 		state = PlayerState.CONNECTED;
 		if(!Server.addReadyPlayer()){
 			//Il server ha rifiutato il passaggio di stato di questo player quindi ne chiude la connessione
-			physicalLink.close();
+			return false;
 		}
+		return true;
 	}
 
 	/**
@@ -50,10 +55,35 @@ public class Player {
 	}
 
 	/**
-	 * Metodo getter del tunnerl
-	 * @return ritorna il tunnel client corrispettivo
+	 * Metodo che aggiunge una cartella nella lista di cartelle
+	 * @param c cartella da aggiungere
 	 */
-	public TunnelClient getPhysicalLink() {
-		return physicalLink;
+	public void addCartella(Cartella c) {
+		cartelle.add(c);
+	}
+
+	/**
+	 * Setter per il numero di cartelle.
+	 * @param n numero di cartelle
+	 */
+	public void setNumeroCartelle(int n) {
+		this.n = n;
+	}
+
+	/**
+	 * Metodo getter numero cartelle
+	 * @return n numero di cartelle
+	 */
+	public int getNumeroCartelle() {
+		return n;
+	}
+
+	/**
+	 * Ritorna la cartella in formato stringa csv
+	 * @param n il numero della cartella
+	 * @return la stringa in formato csv della cartella
+	 */
+	public String CartellaToString(int n) {
+		return cartelle.get(n).toString();
 	}
 }

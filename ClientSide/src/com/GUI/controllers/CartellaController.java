@@ -24,26 +24,31 @@ public class CartellaController {
 
     @FXML
     public void callAmbo(){
-        PlayerController.effettuaChiamataAmbo();
+        call(1);
     }
 
     @FXML
     public void callTerno(){
-        PlayerController.effettuaChiamataTerno();
+        call(2);
     }
 
     @FXML
     public void callQuaterna(){
-        PlayerController.effettuaChiamataQuaterna();
+        call(3);
     }
 
     @FXML
     public void callCinquina(){
-        PlayerController.effettuaChiamataCinquina();
+        call(4);
     }
 
     @FXML
     public void callTombola(){
-        PlayerController.effettuaChiamataTombola();
+        call(5);
+    }
+
+
+    private void call(int i){
+        PlayerController.chiamata(i);
     }
 }

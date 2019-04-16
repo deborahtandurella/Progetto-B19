@@ -1,0 +1,16 @@
+.checkNUM{
+        -fx-background-color:#ed1212;
+        -fx-background-radius: 5,5,4;
+        -fx-background-insets: 0 0 -1 0,0,1;
+        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+        -fx-text-alignment: center;
+}
+
+
+.chekkato{
+            -fx-background-color:#09edcb;
+            -fx-background-radius: 5,5,4;
+            -fx-background-insets: 0 0 -1 0,0,1;
+            -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+            -fx-text-alignment: center;
+}

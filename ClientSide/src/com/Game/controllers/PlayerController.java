@@ -15,20 +15,8 @@ public class PlayerController {
         c.avviaClient();
     }
 
-    public static void effettuaChiamataAmbo(){
-        c.chiamata(1);
-    }
-    public static void effettuaChiamataTerno(){
-        c.chiamata(2);
-    }
-    public static void effettuaChiamataQuaterna(){
-        c.chiamata(3);
-    }
-    public static void effettuaChiamataCinquina(){
-        c.chiamata(4);
-    }
-    public static void effettuaChiamataTombola(){
-        c.chiamata(5);
+    public static void chiamata(int i){
+        c.chiamata(i);
     }
 
 

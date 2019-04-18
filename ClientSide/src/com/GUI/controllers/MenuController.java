@@ -1,6 +1,5 @@
 package com.GUI.controllers;
 
-import com.Game.controllers.PlayerController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,7 +34,7 @@ public class MenuController {
 
     @FXML
     public void ActionPlay(ActionEvent event) throws IOException {
-        PlayerController.startGame(txt_username.getText());
+
 
         //metodo che cambia la scena
         Parent cartellaParent = FXMLLoader.load(getClass().getResource("../../../resources/Cartella.fxml"));

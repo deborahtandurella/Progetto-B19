@@ -1,5 +1,7 @@
 package com.Game.controllers;
 
+import com.Game.CallEnum;
+import com.Game.Cartella;
 import com.Game.Tomboliere;
 
 public class GameController {
@@ -15,5 +17,16 @@ public class GameController {
 	}
 
 
+	public Integer[] getCartella() {
+		return p.getCartella().getNumeri();
+	}
+
+	public boolean buttonControl(CallEnum callEnum, Cartella cartella) {
+		return t.checkCall(callEnum,cartella);
+	}
+
+	public Integer estraiNumero()  {
+		return t.getNumber();
+	}
 
 }

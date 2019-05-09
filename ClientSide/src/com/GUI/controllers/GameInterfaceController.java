@@ -69,6 +69,11 @@ public class GameInterfaceController implements Initializable {
     //cartella di prova, in realtà dovrà essere un arraylist contenente tutte le cartelle
     private CartellaComponent listaCartelle = new CartellaComponent();
 
+
+    public GameInterfaceController(CartellaComponent listaCartelle) {
+        this.listaCartelle = listaCartelle;
+    }
+
     public void amboEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.AMBO, cartelle)){
             textField.setText("Complimenti hai fatto ambo!!");
@@ -139,26 +144,23 @@ public class GameInterfaceController implements Initializable {
         //numCartelle = 1;
         //devo mettere la cartellacomponent e agganciarle agli anchorpane
 
-        setListaCartelle(firstController.getListaCartelle());
+        firstController = new StartingInterfaceController();
 
         anchor.getChildren().add(listaCartelle);
 
 
         ArrayList<Integer> aggNum = new ArrayList<>();
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true){
-                    int numero = logicController.estraiNumero();
-                    aggNum.add(numero);
-                    ObservableList<Integer> list = FXCollections.observableArrayList(aggNum);
-                    comboBox.setValue((Integer) numero);
-                    comboBox.setItems(list);
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread t = new Thread(() -> {
+            while (true){
+                int numero = logicController.estraiNumero();
+                aggNum.add(numero);
+                ObservableList<Integer> list = FXCollections.observableArrayList(aggNum);
+                comboBox.setValue((Integer) numero);
+                comboBox.setItems(list);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });

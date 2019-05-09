@@ -2,9 +2,7 @@ package com.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,20 +15,22 @@ public class CartellaComponent extends GridPane {
         super();
 
         for (int i = 0; i < 9; i++) {
-            this.getColumnConstraints().add(new ColumnConstraints(100));
+            this.getColumnConstraints().add(new ColumnConstraints(75));
         }
 
         for (int i = 0; i < 3; i++) {
-            this.getRowConstraints().add(new RowConstraints(100));
+            this.getRowConstraints().add(new RowConstraints(75));
         }
 
+        this.setStyle("-fx-border-color: black; -fx-grid-lines-visible: true");
+
+        this.getStylesheets().add("./resources/Style.CSS");
         bottoni = new ArrayList<>();
 
         for (int i = 0; i < 28; i++) {
             Button tmp = new Button();
 
-
-            tmp.setPrefSize(100,100);
+            tmp.setPrefSize(75,75);
 
             bottoni.add(tmp);
         }
@@ -39,8 +39,6 @@ public class CartellaComponent extends GridPane {
 
 
     }
-
-
 
 
     public void setNumeri(Integer[] numeri){
@@ -60,7 +58,7 @@ public class CartellaComponent extends GridPane {
 
                             btn.getStyleClass().remove("checkNUM");
                             btn.getStyleClass().add("chekkato");
-                        }else {
+                        }else if (btn.getStyleClass().contains("chekkato")){
                             btn.getStyleClass().remove("chekkato");
                             btn.getStyleClass().add("checkNUM");
                         }

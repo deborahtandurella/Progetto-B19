@@ -82,9 +82,12 @@ public class StartingInterfaceController implements Initializable {
 
         //collegamento con GameInterface
         Stage primaryStage = new Stage();
-        AnchorPane root = new FXMLLoader().load(getClass().getResource("../../../resources/GameInterface.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/GameInterface.fxml"));
+
+        loader.setController(new GameInterfaceController(listaCartelle));
+        AnchorPane root = loader.load();
         AnchorPane a = (AnchorPane) root.getChildren().get(0);
-        a.getChildren().add(cartella);
         Scene scene = new Scene(root, 600, 400);
 
         primaryStage.setScene(scene);

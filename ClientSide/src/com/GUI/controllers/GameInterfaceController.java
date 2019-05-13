@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -49,17 +50,16 @@ public class GameInterfaceController implements Initializable {
     Button btn_previous;
 
     @FXML
-    ComboBox comboBox;
+    ComboBox combobox;
 
     @FXML
     TextField textField;
 
+    private int index;
+
     private GameController logicController;
     private CallEnum btnValue;
-    private StartingInterfaceController firstController;
 
-    // deve diventare un arraylist
-    private Cartella cartelle;
     private boolean nextBtn = false;
     private boolean previousBtn = false;
 
@@ -67,52 +67,75 @@ public class GameInterfaceController implements Initializable {
     private int numCartelle = 1;
 
     //cartella di prova, in realtà dovrà essere un arraylist contenente tutte le cartelle
-    private CartellaComponent listaCartelle = new CartellaComponent();
+    private ArrayList<CartellaComponent> listaCartelle;
 
 
-    public GameInterfaceController(CartellaComponent listaCartelle) {
+    public GameInterfaceController(ArrayList<CartellaComponent> listaCartelle, GameController controller) {
         this.listaCartelle = listaCartelle;
+        this.logicController = controller;
+        this.index = 0;
     }
 
     public void amboEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.AMBO, cartelle)){
+        if (logicController.buttonControl(btnValue.AMBO, logicController.getCartella(index))){
             textField.setText("Complimenti hai fatto ambo!!");
-        };
+            btn_ambo.setDisable(true);
+        }
 
     }
 
     public void ternaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.TERNA, cartelle)){
+        if (logicController.buttonControl(btnValue.TERNA, logicController.getCartella(index))){
             textField.setText("Complimenti hai fatto terna!!");
+            btn_terna.setDisable(true);
         };
     }
 
     public void quaternaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.QUATERNA, cartelle)){
+        if (logicController.buttonControl(btnValue.QUATERNA, logicController.getCartella(index))){
             textField.setText("Complimenti hai fatto quaterna!!");
+            btn_quaterna.setDisable(true);
         };
     }
 
     public void cinquinaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.CINQUINA, cartelle)){
+        if (logicController.buttonControl(btnValue.CINQUINA, logicController.getCartella(index))){
             textField.setText("Complimenti hai fatto cinquina!!");
-        };
+
+            btn_cinquina.setDisable(true);
+        }
     }
 
     public void tombolaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.TOMBOLA, cartelle)){
+        if (logicController.buttonControl(btnValue.TOMBOLA, logicController.getCartella(index))){
             textField.setText("Complimenti hai fatto tombola!!");
+
+            btn_tombola.setDisable(true);
         };
     }
 
     //da implementare successivamente
     public void nextButton(ActionEvent event){
+        index++;
 
+        if(index >= logicController.getCartellaCount()){
+            index = 0;
+        }
+
+        anchor.getChildren().remove(0);
+        anchor.getChildren().add(listaCartelle.get(index));
+        System.out.println(index);
     }
 
     //da implementare successivamente
     public void previousButton(ActionEvent event){
-
+        index--;
+        if(index <0){
+            index = logicController.getCartellaCount()-1;
+        }
+        anchor.getChildren().remove(0);
+        anchor.getChildren().add(listaCartelle.get(index));
+        System.out.println(index);
     }
 
 
@@ -129,14 +152,6 @@ public class GameInterfaceController implements Initializable {
 
 
 
-    //da sostituire successivamente il parametro con un arraylist che conterrà tutte le cartelle
-    public void setListaCartelle(CartellaComponent cartella){
-        Integer[] num = cartelle.getNumeri();
-
-        CartellaComponent cartella1 = new CartellaComponent();
-        cartella1.setNumeri(num);
-        listaCartelle = cartella;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -144,26 +159,26 @@ public class GameInterfaceController implements Initializable {
         //numCartelle = 1;
         //devo mettere la cartellacomponent e agganciarle agli anchorpane
 
-        firstController = new StartingInterfaceController();
 
-        anchor.getChildren().add(listaCartelle);
+        anchor.getChildren().add(listaCartelle.get(index));
 
+        logicController.startExtraction(() -> updateExtractions());
+        textField.setDisable(true);
 
-        ArrayList<Integer> aggNum = new ArrayList<>();
-        Thread t = new Thread(() -> {
-            while (true){
-                int numero = logicController.estraiNumero();
-                aggNum.add(numero);
-                ObservableList<Integer> list = FXCollections.observableArrayList(aggNum);
-                comboBox.setValue((Integer) numero);
-                comboBox.setItems(list);
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
     }
+
+    private void updateExtractions() {
+        ArrayList<Integer> extractions = logicController.getExtractions();
+        combobox.getSelectionModel().clearSelection();
+        combobox.getItems().clear();
+
+        ObservableList<Integer> list = FXCollections.observableArrayList(extractions);
+
+        combobox.setItems(list);
+        textField.setText("Numero estratto: " + list.get(list.size()-1));
+    }
+
+
+
 }

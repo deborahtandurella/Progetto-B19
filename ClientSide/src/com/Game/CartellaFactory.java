@@ -10,52 +10,54 @@ public class CartellaFactory {
 
 		ArrayList<Integer> numeri = new ArrayList<>();
 
-		while (numeri.size()<27){
 
-			ArrayList<Integer> tmpNum = createRow();
+		ArrayList<Integer> tmpNum = createRow(numeri);
+		numeri.addAll(tmpNum);
 
-			boolean flag = false;
+		tmpNum = createRow(numeri);
+		numeri.addAll(tmpNum);
 
-			for (int i = 0; i < tmpNum.size(); i++) {
-				if(numeri.contains(tmpNum.get(i)) && tmpNum.get(i) != 0){
-					flag = true;
-					break;
-				}
-			}
-
-			if(!flag){
-				//Numeri vanno bene
-				numeri.addAll(tmpNum);
-			}
-
-		}
+		tmpNum = createRow(numeri);
+		numeri.addAll(tmpNum);
 
 
 		Cartella c = new Cartella(numeri);
 		return c;
 	}
 
-	private static ArrayList<Integer> createRow(){
+	private static ArrayList<Integer> createRow(ArrayList<Integer> oldNum){
 		Random r = new Random();
 
 		ArrayList<Integer> numeri = new ArrayList<>();
 
-		for (int i = 1; i < 10; i++) {
-			int n = r.nextInt(10*i)+(10*i-9);
+		for (int i = 0; i < 10; i++) {
+
+			int n;
+			while(true) {
+
+
+
+				if (i == 0) {
+					n = r.nextInt(8) + 1;
+				} else {
+					n = r.nextInt(10) + i * 10;
+				}
+
+				if(!oldNum.contains(n)){
+					break;
+				}
+			}
+
+
 			numeri.add(n);
 		}
 
-		ArrayList<Integer> indici = new ArrayList<>();
 		int a = 0;
 
-
-		while(a <4){
+		while(a <5){
 			int n = r.nextInt(numeri.size());
-			if(!indici.contains(n)){
-				a++;
-				numeri.set(n,0);
-				indici.add(n);
-			}
+			numeri.set(n,0);
+			a++;
 		}
 
 		return numeri;

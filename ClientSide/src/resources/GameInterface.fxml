@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  >
+<AnchorPane prefHeight="1000.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="anchor" layoutX="145.0" layoutY="109.0" prefHeight="305.0" prefWidth="644.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="109.0" />
+      <AnchorPane fx:id="anchor" layoutX="15.0" layoutY="14.0" prefHeight="412.0" prefWidth="788.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0" />
       <Button fx:id="btn_ambo" layoutX="99.0" layoutY="540.0" mnemonicParsing="false" onAction="#amboEvent" prefHeight="100.0" prefWidth="200.0" text="Ambo" AnchorPane.leftAnchor="15.0">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
@@ -36,13 +33,13 @@
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="combobox" layoutX="847.0" layoutY="401.0" prefHeight="52.0" prefWidth="150.0" promptText="Numbers drawn" />
-      <Button fx:id="btn_previous" layoutX="847.0" layoutY="131.0" mnemonicParsing="false" onAction="#previousButton" prefHeight="89.0" prefWidth="150.0" text="Previous">
+      <ComboBox fx:id="combobox" layoutX="811.0" layoutY="452.0" prefHeight="52.0" prefWidth="150.0" promptText="Estratti" />
+      <Button fx:id="btn_previous" layoutX="811.0" layoutY="14.0" mnemonicParsing="false" onAction="#previousButton" prefHeight="89.0" prefWidth="150.0" text="Previous">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_next" layoutX="847.0" layoutY="262.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="89.0" prefWidth="150.0" text="Next">
+      <Button fx:id="btn_next" layoutX="811.0" layoutY="337.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="89.0" prefWidth="150.0" text="Next">
          <font>
             <Font size="18.0" />
          </font>

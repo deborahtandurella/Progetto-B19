@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import java.lang.Exception;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StartingInterfaceController implements Initializable {
@@ -37,71 +38,52 @@ public class StartingInterfaceController implements Initializable {
     private String numeroCartelle;
     private String username;
     private GameController gc;
-    private CartellaComponent listaCartelle;
+    private ArrayList<CartellaComponent> listaCartelle;
 
 
-
-    //da sostituire successivamente il parametro con un arraylist che conterrà tutte le cartelle
-    public void setListaCartelle(CartellaComponent cartella){
-        this.listaCartelle = cartella;
-    }
-
-    public CartellaComponent getListaCartelle() {
-        return listaCartelle;
-    }
-
-    public void setNumeroCartelle(String numeroCartelle) {
-        this.numeroCartelle = numeroCartelle;
-    }
-
-    public String getNumeroCartelle() {
-        return numeroCartelle;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6");
 
     @FXML
     public void buttonEvent(ActionEvent event) throws Exception {
+
+        gc = new GameController(textField.getText(),Integer.valueOf(comboBox.getValue()));
         //ottengo da GameController una nuova cartella per crearne il componente
-        Integer[] num = gc.getCartella();
-        CartellaComponent cartella = new CartellaComponent();
-        setNumeroCartelle(comboBox.getValue());
-        setUsername(textField.getText());
 
-        //variabili utili
-        cartella.setNumeri(num);
-        setListaCartelle(cartella);
+        for (int i = 0; i < gc.getCartellaCount(); i++) {
+            Integer[] num = gc.getCartellaAsArray(i);
+            CartellaComponent cartella = new CartellaComponent();
+            cartella.setNumeri(num);
+            listaCartelle.add(cartella);
+        }
+        
 
-        //collegamento con GameInterface
-        Stage primaryStage = new Stage();
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/GameInterface.fxml"));
 
-        loader.setController(new GameInterfaceController(listaCartelle));
+        loader.setController(new GameInterfaceController(listaCartelle,gc));
         AnchorPane root = loader.load();
         AnchorPane a = (AnchorPane) root.getChildren().get(0);
-        Scene scene = new Scene(root, 600, 400);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Stage currStage = (Stage) textField.getScene().getWindow();
+        currStage.setScene(new Scene(root, 600, 400));
+        currStage.setOnCloseRequest(e -> handleClose());
+        currStage.show();
 
 
 
+    }
+
+    private void handleClose() {
+        gc.stopExtractions();
     }
 
     //setto il combobox, oggetto gamecontroller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboBox.setItems(list);
-        gc = new GameController("Ciao");
+        listaCartelle = new ArrayList<>();
 
     }
 }

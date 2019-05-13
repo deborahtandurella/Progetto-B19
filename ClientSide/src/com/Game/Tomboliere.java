@@ -32,6 +32,10 @@ public class Tomboliere {
 		return n;
 	}
 
+	public ArrayList<Integer> getExtractions(){
+		return numeriUsciti;
+	}
+
 	/**
 	 * Generatore nuova cartella
 	 * @return ritorna una nuova cartella

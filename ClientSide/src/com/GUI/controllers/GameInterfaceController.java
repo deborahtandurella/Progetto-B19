@@ -155,9 +155,6 @@ public class GameInterfaceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //per la fase di prova metto numCartele = 1, in realtà dovra essere uguale a ciò che setta il giocatore
-        //numCartelle = 1;
-        //devo mettere la cartellacomponent e agganciarle agli anchorpane
 
 
         anchor.getChildren().add(listaCartelle.get(index));
@@ -178,7 +175,5 @@ public class GameInterfaceController implements Initializable {
         combobox.setItems(list);
         textField.setText("Numero estratto: " + list.get(list.size()-1));
     }
-
-
 
 }

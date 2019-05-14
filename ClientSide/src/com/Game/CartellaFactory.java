@@ -30,7 +30,7 @@ public class CartellaFactory {
 
 		ArrayList<Integer> numeri = new ArrayList<>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 
 			int n;
 			while(true) {
@@ -54,10 +54,12 @@ public class CartellaFactory {
 
 		int a = 0;
 
-		while(a <5){
+		while(a <4){
 			int n = r.nextInt(numeri.size());
-			numeri.set(n,0);
-			a++;
+			if(numeri.get(n) != 0) {
+				numeri.set(n, 0);
+				a++;
+			}
 		}
 
 		return numeri;

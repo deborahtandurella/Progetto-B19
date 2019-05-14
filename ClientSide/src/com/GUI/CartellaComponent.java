@@ -14,7 +14,7 @@ public class CartellaComponent extends GridPane {
     public CartellaComponent() {
         super();
 
-        for (int i = 0; i <= 9; i++) {
+        for (int i = 0; i < 9; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(75));
         }
 
@@ -27,7 +27,7 @@ public class CartellaComponent extends GridPane {
         this.getStylesheets().add("./resources/Style.CSS");
         bottoni = new ArrayList<>();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 27; i++) {
             Button tmp = new Button();
 
             tmp.setPrefSize(75,75);
@@ -44,8 +44,8 @@ public class CartellaComponent extends GridPane {
     public void setNumeri(Integer[] numeri){
 
         for (int rows = 0; rows < 3; rows++) {
-            for (int cols = 0; cols <= 9; cols++) {
-                int indice = cols + rows*10;
+            for (int cols = 0; cols < 9; cols++) {
+                int indice = cols + rows*9;
                 if(numeri[indice] != 0) {
                     bottoni.get(indice).setText(String.valueOf(numeri[indice]));
 

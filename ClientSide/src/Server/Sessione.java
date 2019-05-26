@@ -1,5 +1,7 @@
 package Server;
 
+import com.Game.CallEnum;
+import com.Game.Cartella;
 import com.Game.CartellaFactory;
 import com.Game.Tomboliere;
 import com.Game.controllers.Player;
@@ -54,5 +56,18 @@ public class Sessione {
 
     public ArrayList<Integer> getExtractions() {
         return t.getExtractions();
+    }
+
+    public boolean checkCall(String username, int iCartella, CallEnum call) throws Exception {
+        return t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella));
+    }
+
+    private int findPlayer(String username) {
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getUsername().equals(username)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

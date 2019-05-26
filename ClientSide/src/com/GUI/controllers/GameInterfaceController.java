@@ -159,7 +159,7 @@ public class GameInterfaceController implements Initializable {
 
         anchor.getChildren().add(listaCartelle.get(index));
 
-        logicController.startExtraction(() -> updateExtractions());
+        logicController.startExtraction(this::updateExtractions);
         textField.setDisable(true);
 
 

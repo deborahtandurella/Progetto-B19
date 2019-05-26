@@ -3,24 +3,32 @@ package com.Game.controllers;
 import com.Game.CallEnum;
 import com.Game.Cartella;
 import com.Game.Tomboliere;
+import com.jsoniter.JsonIterator;
+import com.jsoniter.any.Any;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
 
 	private Player p;
-	private Tomboliere t;
+	private ArrayList<Integer> extractions;
 	private Thread estrattore;
 	private int n;
 
 	public GameController(String playerName, int n) {
 
-		p = new Player(playerName);
-		t = new Tomboliere();
-		for (int i = 0; i < n; i++) {
-			p.addCartella(t.getCartella());
-		}
+		String playerJson = connectHttpTo("http://localhost:8282/addplayer?U=" + playerName + "&N=" + n);
+
+		extractions = new ArrayList<>();
+
+		p = deserializePlayer(playerJson,n);
+
 
 		this.n = n;
 
@@ -29,18 +37,93 @@ public class GameController {
 
 	}
 
+	private Player deserializePlayer(String playerJson, int n) {
+		//Parsing json
+		Any anyClass = JsonIterator.deserialize(playerJson);
+
+		String uName = String.valueOf(anyClass.get("username"));
+
+		Any cards = anyClass.get("cartelle");
+
+		Player p = new Player(uName);
+
+		for (int i = 0; i < n; i++) {
+			Any card = cards.get(i);
+			String numbers = String.valueOf(card.get("numeri"));
+			ArrayList<Integer> numArr = string2Array(numbers);
+
+			p.addCartella(new Cartella(numArr));
+
+		}
+
+
+
+		return p;
+
+	}
+
+	private ArrayList<Integer> string2Array(String numbers) {
+		String num = numbers.substring(1,numbers.length()-1);
+		String[] nums = num.split(",");
+
+		ArrayList<Integer> numsArr = new ArrayList<>();
+
+		for (int i = 0; i < nums.length; i++) {
+			numsArr.add(Integer.valueOf(nums[i]));
+		}
+
+
+		return numsArr;
+	}
+
+	private String  connectHttpTo(String url) {
+		try {
+			URL connectionUrl = new URL(url);
+			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
+			connection.setRequestMethod("GET");
+
+			int rcode = connection.getResponseCode();
+
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Response Code : " + rcode);
+
+			BufferedReader in = new BufferedReader(
+					new InputStreamReader(connection.getInputStream()));
+			String inputLine;
+			StringBuilder response = new StringBuilder();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			//return result
+			return response.toString();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 	public void startExtraction(Runnable updateFunction) {
 		estrattore = new Thread(() -> {
+
 			while (true){
 
 				try {
-					Thread.sleep(15*1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
+				String nums = connectHttpTo("http://localhost:8282/extractions");
 
-				int numero = estraiNumero();
+				Any anyNums = JsonIterator.deserialize(nums);
+				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
+
+
 				updateFunction.run();
 			}
 		});
@@ -60,18 +143,15 @@ public class GameController {
 	public Integer[] getCartellaAsArray(int index) {return p.getCartella(index).getNumeri();}
 
 	public boolean buttonControl(CallEnum callEnum, Cartella cartella) {
-		return t.checkCall(callEnum,cartella);
-	}
-
-	public Integer estraiNumero()  {
-		return t.getNumber();
+		//return t.checkCall(callEnum,cartella);
+		return false;
 	}
 
 	public ArrayList<Integer> getExtractions() {
 
 
 
-		return t.getExtractions();
+		return extractions;
 	}
 
 	public int getCartellaCount() {

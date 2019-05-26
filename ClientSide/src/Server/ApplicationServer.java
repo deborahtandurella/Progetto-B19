@@ -37,13 +37,5 @@ public class ApplicationServer {
         public void stop() throws Exception {
             server.stop();
         }
-
-
-        private void addStaticFileServing(ServletContextHandler handler) {
-            ServletHolder holderPwd = new ServletHolder("default", new DefaultServlet());
-            holderPwd.setInitParameter("dirAllowed","false");
-            holderPwd.setInitParameter("pathInfoOnly","true");
-            handler.addServlet(holderPwd, "/static/*");
-        }
     }
 

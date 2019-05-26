@@ -28,7 +28,7 @@ public class Sessione {
             while (true){
                 System.out.println(t.getNumber());
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

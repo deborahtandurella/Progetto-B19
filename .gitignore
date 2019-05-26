@@ -1,6 +1,9 @@
 #Libs
 ClientSide/lib/*
 
+#out
+ClientSide/out/*
+
 #Intellij files
 *.iws
 *.iml

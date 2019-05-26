@@ -19,7 +19,7 @@ public class Tomboliere {
 	 * Estrattore numeri
 	 * @return ritorna un numero estratto
 	 */
-	public Integer getNumber(){
+	public synchronized Integer getNumber(){
 		int n;
 		while (true){
 			n = r.nextInt(90)+1;
@@ -32,7 +32,7 @@ public class Tomboliere {
 		return n;
 	}
 
-	public ArrayList<Integer> getExtractions(){
+	public synchronized ArrayList<Integer> getExtractions(){
 		return numeriUsciti;
 	}
 

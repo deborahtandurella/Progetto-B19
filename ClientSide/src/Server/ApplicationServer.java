@@ -1,4 +1,6 @@
 package Server;
+import Server.servlets.AddPlayerServlet;
+import Server.servlets.GetExtractionsServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -6,27 +8,25 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 
 import javax.servlet.Servlet;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ApplicationServer {
 
         private int port;
-        private Servlet servlet;
         private Server server;
 
         public static final Sessione s = new Sessione();
 
 
-        public ApplicationServer(int port, Servlet servlet) {
+        public ApplicationServer(int port) {
             this.port = port;
-            this.servlet = servlet;
+            s.startExtractor();
         }
 
         public void start() throws Exception {
             server = new Server(port);
             ServletContextHandler handler = new ServletContextHandler();
-            handler.addServlet(new ServletHolder(servlet), "/addplayer");
+            handler.addServlet(new ServletHolder(new AddPlayerServlet()), "/addplayer");
+            handler.addServlet(new ServletHolder(new GetExtractionsServlet()), "/extractions");
             //addStaticFileServing(handler);
             server.setHandler(handler);
             server.start();

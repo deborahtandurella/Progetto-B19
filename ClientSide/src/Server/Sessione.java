@@ -14,6 +14,27 @@ public class Sessione {
     public Sessione() {
         t = new Tomboliere();
         players = new ArrayList<>();
+
+
+
+
+    }
+
+
+    public void startExtractor(){
+        Thread extractor = new Thread(() -> {
+            while (true){
+                System.out.println(t.getNumber());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        extractor.start();
     }
 
     public Player addPLayer(String username, int n){
@@ -31,5 +52,7 @@ public class Sessione {
     }
 
 
-
+    public ArrayList<Integer> getExtractions() {
+        return t.getExtractions();
+    }
 }

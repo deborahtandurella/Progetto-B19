@@ -1,5 +1,6 @@
 package Server;
 import Server.servlets.AddPlayerServlet;
+import Server.servlets.CheckCardServlet;
 import Server.servlets.GetExtractionsServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -27,7 +28,8 @@ public class ApplicationServer {
             ServletContextHandler handler = new ServletContextHandler();
             handler.addServlet(new ServletHolder(new AddPlayerServlet()), "/addplayer");
             handler.addServlet(new ServletHolder(new GetExtractionsServlet()), "/extractions");
-            //addStaticFileServing(handler);
+            handler.addServlet(new ServletHolder(new CheckCardServlet()), "/checkcard");
+
             server.setHandler(handler);
             server.start();
         }

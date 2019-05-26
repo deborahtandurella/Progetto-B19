@@ -14,7 +14,6 @@ import java.util.List;
 
 public class AddPlayerServlet extends HttpServlet {
 
-    private List<String> names = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

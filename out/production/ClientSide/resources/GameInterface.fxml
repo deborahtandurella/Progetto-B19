@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="anchor" layoutX="15.0" layoutY="14.0" prefHeight="254.0" prefWidth="746.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="btn_ambo" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#amboEvent" prefHeight="71.0" prefWidth="142.0" text="Ambo" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font name="Phosphate Inline" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_terna" layoutX="174.0" layoutY="352.0" mnemonicParsing="false" onAction="#ternaEvent" prefHeight="71.0" prefWidth="142.0" text="TERNA">
+         <font>
+            <Font name="Phosphate Inline" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_quaterna" layoutX="336.0" layoutY="352.0" mnemonicParsing="false" onAction="#quaternaEvent" prefHeight="71.0" prefWidth="142.0" text="QUATERNA">
+         <font>
+            <Font name="Phosphate Inline" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_cinquina" layoutX="497.0" layoutY="352.0" mnemonicParsing="false" onAction="#cinquinaEvent" prefHeight="71.0" prefWidth="142.0" text="CINQUINA">
+         <font>
+            <Font name="Phosphate Inline" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_tombola" layoutX="14.0" layoutY="436.0" mnemonicParsing="false" onAction="#tombolaEvent" prefHeight="100.0" prefWidth="626.0" text="TOMBOLA!">
+         <font>
+            <Font name="Phosphate Inline" size="18.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="combobox" layoutX="652.0" layoutY="436.0" prefHeight="100.0" prefWidth="150.0" promptText="Estratti" />
+      <Button fx:id="btn_previous" layoutX="25.0" layoutY="286.0" mnemonicParsing="false" onAction="#previousButton" prefHeight="50.0" prefWidth="121.0" text="Previous">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_next" layoutX="536.0" layoutY="286.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="50.0" prefWidth="103.0" text="Next">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="textField" layoutX="174.0" layoutY="287.0" prefHeight="50.0" prefWidth="350.0">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

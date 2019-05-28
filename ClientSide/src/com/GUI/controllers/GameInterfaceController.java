@@ -77,7 +77,7 @@ public class GameInterfaceController implements Initializable {
     }
 
     public void amboEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.AMBO, logicController.getCartella(index))){
+        if (logicController.buttonControl(btnValue.AMBO, index)){
             textField.setText("Complimenti hai fatto ambo!!");
             btn_ambo.setDisable(true);
         }
@@ -85,21 +85,21 @@ public class GameInterfaceController implements Initializable {
     }
 
     public void ternaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.TERNA, logicController.getCartella(index))){
+        if (logicController.buttonControl(btnValue.TERNA,index)){
             textField.setText("Complimenti hai fatto terna!!");
             btn_terna.setDisable(true);
         };
     }
 
     public void quaternaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.QUATERNA, logicController.getCartella(index))){
+        if (logicController.buttonControl(btnValue.QUATERNA, index)){
             textField.setText("Complimenti hai fatto quaterna!!");
             btn_quaterna.setDisable(true);
         };
     }
 
     public void cinquinaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.CINQUINA, logicController.getCartella(index))){
+        if (logicController.buttonControl(btnValue.CINQUINA, index)){
             textField.setText("Complimenti hai fatto cinquina!!");
 
             btn_cinquina.setDisable(true);
@@ -107,7 +107,7 @@ public class GameInterfaceController implements Initializable {
     }
 
     public void tombolaEvent(ActionEvent event){
-        if (logicController.buttonControl(btnValue.TOMBOLA, logicController.getCartella(index))){
+        if (logicController.buttonControl(btnValue.TOMBOLA, index)){
             textField.setText("Complimenti hai fatto tombola!!");
 
             btn_tombola.setDisable(true);

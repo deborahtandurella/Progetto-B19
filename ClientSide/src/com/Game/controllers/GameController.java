@@ -6,6 +6,7 @@ import com.Game.Tomboliere;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -23,7 +24,7 @@ public class GameController {
 
 	public GameController(String playerName, int n) {
 
-		String playerJson = connectHttpTo("http://localhost:8282/addplayer?U=" + playerName + "&N=" + n);
+		String playerJson = connectHttpTo("http://localhost:8282/addplayer?U=" + playerName + "&N=" + n,true);
 
 		extractions = new ArrayList<>();
 
@@ -76,7 +77,8 @@ public class GameController {
 		return numsArr;
 	}
 
-	private String  connectHttpTo(String url) {
+	private String  connectHttpTo(String url,boolean a) {
+		String rcodetostring;
 		try {
 			URL connectionUrl = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
@@ -96,9 +98,11 @@ public class GameController {
 				response.append(inputLine);
 			}
 			in.close();
-
+			rcodetostring = String.valueOf(rcode);
 			//return result
-			return response.toString();
+			if(a)
+			{return response.toString();}
+			else {return rcodetostring;}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +122,7 @@ public class GameController {
 					e.printStackTrace();
 				}
 
-				String nums = connectHttpTo("http://localhost:8282/extractions");
+				String nums = connectHttpTo("http://localhost:8282/extractions",true);
 
 				Any anyNums = JsonIterator.deserialize(nums);
 				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
@@ -142,9 +146,16 @@ public class GameController {
 	}
 	public Integer[] getCartellaAsArray(int index) {return p.getCartella(index).getNumeri();}
 
-	public boolean buttonControl(CallEnum callEnum, Cartella cartella) {
-		//return t.checkCall(callEnum,cartella);
-		return false;
+	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
+		String resp;
+		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum,false);
+
+
+		if(resp.equals("200") )
+		{return true;}
+		else
+		{return false;}
+
 	}
 
 	public ArrayList<Integer> getExtractions() {

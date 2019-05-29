@@ -8,6 +8,8 @@ ClientSide/out/*
 *.iws
 *.iml
 *.ipr
+.idea/*
+.idea
 
 # Compiled class file
 *.class

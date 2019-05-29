@@ -148,7 +148,7 @@ public class GameController {
 
 	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
 		String resp;
-		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum,false);
+		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name(),false);
 
 
 		if(resp.equals("200") )

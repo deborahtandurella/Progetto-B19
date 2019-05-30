@@ -78,8 +78,9 @@ public class GameController {
 	}
 
 	private String  connectHttpTo(String url,boolean a) {
-		String rcodetostring;
+
 		try {
+			String rcodetostring;
 			URL connectionUrl = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
 			connection.setRequestMethod("GET");
@@ -148,10 +149,9 @@ public class GameController {
 
 	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
 		String resp;
-		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name(),false);
+		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name()+ "&LN="+extractions.get(extractions.size()-1),false);
 
-
-		if(resp.equals("200") )
+		if(resp != null && resp.equals("200") )
 		{return true;}
 		else
 		{return false;}
@@ -159,9 +159,6 @@ public class GameController {
 	}
 
 	public ArrayList<Integer> getExtractions() {
-
-
-
 		return extractions;
 	}
 

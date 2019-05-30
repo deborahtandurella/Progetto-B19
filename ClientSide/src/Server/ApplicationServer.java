@@ -20,7 +20,6 @@ public class ApplicationServer {
 
         public ApplicationServer(int port) {
             this.port = port;
-            s.startExtractor();
         }
 
         public void start() throws Exception {

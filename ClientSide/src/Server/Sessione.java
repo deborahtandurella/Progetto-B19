@@ -17,14 +17,16 @@ public class Sessione {
         t = new Tomboliere();
         players = new ArrayList<>();
 
-
-
-
     }
 
 
     public void startExtractor(){
         Thread extractor = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             while (true){
                 System.out.println(t.getNumber());
                 try {
@@ -48,6 +50,9 @@ public class Sessione {
         }
 
         players.add(tmpPlayer);
+        if(players.size()==1){
+            startExtractor();
+        }
         return tmpPlayer;
 
 
@@ -58,8 +63,18 @@ public class Sessione {
         return t.getExtractions();
     }
 
-    public boolean checkCall(String username, int iCartella, CallEnum call) throws Exception {
-        return t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella));
+    public boolean checkCall(String username, int iCartella, CallEnum call, int LN) throws Exception {
+
+        int r = t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella),LN);
+
+        if(r>=0 && r != 15) {
+            players.get(findPlayer(username)).getCartella(iCartella).addWinningRow(r);
+            return true;
+        }else if(r==15){
+            players.get(findPlayer(username)).getCartella(iCartella).setInvalid();
+            return true;
+       }
+        return false;
     }
 
     private int findPlayer(String username) {

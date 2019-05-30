@@ -1,6 +1,7 @@
 package com.GUI.controllers;
 
 import com.GUI.CartellaComponent;
+import com.GUI.NumbersBoard;
 import com.Game.CallEnum;
 import com.Game.CartellaFactory;
 import com.Game.Cartella;
@@ -27,6 +28,9 @@ public class GameInterfaceController implements Initializable {
 
     @FXML
     AnchorPane anchor;
+
+    @FXML
+    AnchorPane anchor2;
 
     @FXML
     Button btn_ambo;
@@ -167,13 +171,13 @@ public class GameInterfaceController implements Initializable {
 
     private void updateExtractions() {
         ArrayList<Integer> extractions = logicController.getExtractions();
-        combobox.getSelectionModel().clearSelection();
-        combobox.getItems().clear();
 
-        ObservableList<Integer> list = FXCollections.observableArrayList(extractions);
 
-        combobox.setItems(list);
-        textField.setText("Numero estratto: " + list.get(list.size()-1));
+        NumbersBoard numbersBoard = (NumbersBoard) anchor2.getChildren().get(0);
+
+        numbersBoard.updateGrid(extractions);
+
+        textField.setText("Numero estratto: " + extractions.get(extractions.size()-1));
     }
 
 }

@@ -1,4 +1,5 @@
 import com.GUI.CartellaComponent;
+import com.GUI.NumbersBoard;
 import com.GUI.controllers.StartingInterfaceController;
 import com.Game.Cartella;
 import com.Game.CartellaFactory;
@@ -30,8 +31,11 @@ public class Main extends Application {
 
 
         //CartellaComponent cartella1 = new CartellaComponent();
+        //NumbersBoard numbersBoard = new NumbersBoard();
+        //numbersBoard.initNumbers();
         //cartella1.setNumeri(num);
         //Pane root = new Pane();
+        //root.getChildren().add(numbersBoard);
 
 
 

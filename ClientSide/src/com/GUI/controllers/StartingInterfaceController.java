@@ -1,6 +1,7 @@
 package com.GUI.controllers;
 
 import com.GUI.CartellaComponent;
+import com.GUI.NumbersBoard;
 import com.Game.Cartella;
 import com.Game.CartellaFactory;
 import com.Game.controllers.GameController;
@@ -56,7 +57,9 @@ public class StartingInterfaceController implements Initializable {
             cartella.setNumeri(num);
             listaCartelle.add(cartella);
         }
-        
+
+        NumbersBoard numbersBoard = new NumbersBoard();
+        numbersBoard.initNumbers();
 
 
 
@@ -64,7 +67,10 @@ public class StartingInterfaceController implements Initializable {
 
         loader.setController(new GameInterfaceController(listaCartelle,gc));
         AnchorPane root = loader.load();
-        AnchorPane a = (AnchorPane) root.getChildren().get(0);
+        AnchorPane a = (AnchorPane) root.getChildren().get(root.getChildren().size()-1);
+
+        a.getChildren().add(numbersBoard);
+
 
         Stage currStage = (Stage) textField.getScene().getWindow();
         currStage.setScene(new Scene(root, 800, 560));

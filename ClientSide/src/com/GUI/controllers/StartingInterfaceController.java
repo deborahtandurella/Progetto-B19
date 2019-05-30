@@ -67,7 +67,7 @@ public class StartingInterfaceController implements Initializable {
         AnchorPane a = (AnchorPane) root.getChildren().get(0);
 
         Stage currStage = (Stage) textField.getScene().getWindow();
-        currStage.setScene(new Scene(root, 600, 400));
+        currStage.setScene(new Scene(root, 800, 560));
         currStage.setOnCloseRequest(e -> handleClose());
         currStage.show();
 

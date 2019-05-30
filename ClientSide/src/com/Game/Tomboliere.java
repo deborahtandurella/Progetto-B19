@@ -51,9 +51,11 @@ public class Tomboliere {
 	 * @return ritorna true se la chiamata è corretta altrimenti ritorna false;
 	 */
 
-	public boolean checkCall(CallEnum callType, Cartella cartella) {
+	public synchronized int checkCall(CallEnum callType, Cartella cartella, int LN) {
 		//Controllo se la cartella è valida (ovvero non ho fatto tombola)
 		if(cartella.isValidCard()){
+
+			ArrayList<Integer> numeriUsciti= getSubExtractions(LN);
 			//Ottengo i numeri
 			Integer[] numeri = cartella.getNumeri();
 
@@ -88,7 +90,7 @@ public class Tomboliere {
 				if (currN >= matchN && cartella.isValidWinningRow(i)) {
 					//Allora aggiungo la riga vincente e ritorno true
 					cartella.addWinningRow(i);
-					return true;
+					return i;
 				}
 
 			}
@@ -106,10 +108,22 @@ public class Tomboliere {
 			//Se ho matchato tutti i numeri allora ritorno true e setto la cartella come non valida
 			if (currN >= matchN) {
 				cartella.setInvalid();
-				return true;
+				return 15;
 			}
 		}
-		return false;
+		return -1;
+	}
+
+	private ArrayList<Integer> getSubExtractions(int LN) {
+		ArrayList<Integer> red=new ArrayList<>();
+
+		for(int i=0;i<numeriUsciti.size();i++){
+			if(numeriUsciti.get(i)==LN){
+				return red;
+			}
+			red.add(numeriUsciti.get(i));
+		}
+		return red;
 	}
 
 	//Membro interno che ritorna il numero di match necessari per il tipo di chaimata

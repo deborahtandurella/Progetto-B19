@@ -8,11 +8,14 @@ public class Tomboliere {
 
 	private ArrayList<Integer> numeriUsciti;
 	private Random r;
+	private ArrayList<CallEnum> wins;
+
 
 	public Tomboliere() {
 
 		numeriUsciti = new ArrayList<>();
 		r = new Random();
+		wins = new ArrayList<>();
 	}
 
 	/**
@@ -52,10 +55,13 @@ public class Tomboliere {
 	 */
 
 	public synchronized int checkCall(CallEnum callType, Cartella cartella, int LN) {
+
+		if(wins.contains(callType)) return -1;
+
 		//Controllo se la cartella è valida (ovvero non ho fatto tombola)
 		if(cartella.isValidCard()){
 
-			ArrayList<Integer> numeriUsciti= getSubExtractions(LN);
+			//ArrayList<Integer> numeriUsciti= getSubExtractions(LN);
 			//Ottengo i numeri
 			Integer[] numeri = cartella.getNumeri();
 
@@ -63,7 +69,7 @@ public class Tomboliere {
 			int matchN = getNumberForCallType(callType);
 
 			//Tengo traccia di quanti ne ho matchati
-			int currN;
+			int currN = 0;
 
 			//Controllo ambo,terna,quaterna,cinquina
 			for (int i = 0; i < 3; i++) {
@@ -80,7 +86,7 @@ public class Tomboliere {
 
 					//Se ho un numero che non è zero e che è contenuto nei numeri usciti, allora aggiungo 1 ai numeri matchati
 					if (tmpNum[j] != 0) {
-						if (numeriUsciti.contains(tmpNum)) {
+						if (numeriUsciti.contains(tmpNum[j])) {
 							currN++;
 						}
 					}
@@ -88,15 +94,21 @@ public class Tomboliere {
 
 				//Se ho matchato tanti numeri quanti sono quelli necessari per la chiamata e nella stessa riga non ho già avuto una vincita
 				if (currN >= matchN && cartella.isValidWinningRow(i)) {
-					//Allora aggiungo la riga vincente e ritorno true
+					//Allora aggiungo la riga vincente e ritorno indice riga
 					cartella.addWinningRow(i);
+					wins.add(callType);
 					return i;
 				}
 
 			}
+		}
 
+		if(callType==CallEnum.TOMBOLA) {
 			//Controlla tombola
-			currN = 0;
+			int currN = 0;
+
+			Integer[] numeri = cartella.getNumeri();
+
 			//Giro tutti i numeri
 			for (int i = 0; i < 27; i++) {
 				//Se numeriUsciti contiene il numero della cartella ed è diverso da zero
@@ -106,11 +118,12 @@ public class Tomboliere {
 				}
 			}
 			//Se ho matchato tutti i numeri allora ritorno true e setto la cartella come non valida
-			if (currN >= matchN) {
+			if (currN >= 15) {
 				cartella.setInvalid();
 				return 15;
 			}
 		}
+
 		return -1;
 	}
 

@@ -38,7 +38,7 @@ public class CheckCardServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_OK);
                     resp.getWriter().write("{\"check\":\"true\"}");
                 }else{
-                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    resp.setStatus(HttpServletResponse.SC_OK);
                     resp.getWriter().write("{\"check\":\"false\"}");
                 }
 
@@ -46,11 +46,11 @@ public class CheckCardServlet extends HttpServlet {
 
 
             }else{
-                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().write("{\"check\":\"false\"}");
             }
         }catch (Exception e) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setStatus(HttpServletResponse.SC_OK);
             resp.getWriter().write("{\"check\":\"false\"}");
         }
 

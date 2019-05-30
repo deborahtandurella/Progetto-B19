@@ -48,7 +48,7 @@ public class Main extends Application {
         Scene scene = new Scene(parent,600,400);
 
 
-
+        primaryStage.setTitle("Tombola Game!");
         primaryStage.setScene(scene);
         primaryStage.show();
 

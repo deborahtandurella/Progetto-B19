@@ -12,6 +12,7 @@ public class Sessione {
 
     private Tomboliere t;
     private ArrayList<Player> players;
+    private static final int minPlayerCount=1;
 
     public Sessione() {
         t = new Tomboliere();
@@ -50,7 +51,7 @@ public class Sessione {
         }
 
         players.add(tmpPlayer);
-        if(players.size()==1){
+        if(players.size()==minPlayerCount){
             startExtractor();
         }
         return tmpPlayer;

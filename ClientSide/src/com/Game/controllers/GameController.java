@@ -22,10 +22,11 @@ public class GameController {
 	private ArrayList<Integer> extractions;
 	private Thread estrattore;
 	private int n;
+	private String ipaddress = "localhost";
 
 	public GameController(String playerName, int n) {
 
-		String playerJson = connectHttpTo("http://localhost:8282/addplayer?U=" + playerName + "&N=" + n);
+		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		extractions = new ArrayList<>();
 
@@ -120,7 +121,7 @@ public class GameController {
 					e.printStackTrace();
 				}
 
-				String nums = connectHttpTo("http://localhost:8282/extractions");
+				String nums = connectHttpTo("http://"+ipaddress+":8282/extractions");
 
 				Any anyNums = JsonIterator.deserialize(nums);
 				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
@@ -146,7 +147,7 @@ public class GameController {
 
 	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
 		String resp;
-		resp=connectHttpTo("http://localhost:8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name()+ "&LN="+extractions.get(extractions.size()-1));
+		resp=connectHttpTo("http://"+ipaddress+":8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name()+ "&LN="+extractions.get(extractions.size()-1));
 
 		if(resp!=null && resp.equals("{\"check\":\"true\"}")){
 			return true;

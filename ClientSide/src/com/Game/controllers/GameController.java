@@ -15,21 +15,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class GameController {
 
 	private Player p;
 	private ArrayList<Integer> extractions;
+	private HashMap<String,String> winnings;
 	private Thread estrattore;
 	private int n;
 	private String ipaddress = "localhost";
+
 
 	public GameController(String playerName, int n) {
 
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		extractions = new ArrayList<>();
-
+		winnings = new HashMap<>();
 		p = deserializePlayer(playerJson,n);
 
 
@@ -126,6 +129,14 @@ public class GameController {
 				Any anyNums = JsonIterator.deserialize(nums);
 				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
 
+				String wins = connectHttpTo("http://\"+ipaddress+\":8282/winnings");
+				Any anyWins = JsonIterator.deserialize(wins);
+				String winners = anyWins.get("winners").toString();
+				winners=winners.substring(1,winners.length()-1);
+				takeWinningUser(winners,winnings);
+
+
+
 
 				updateFunction.run();
 			}
@@ -163,5 +174,24 @@ public class GameController {
 
 	public int getCartellaCount() {
 		return n;
+	}
+
+
+	private void takeWinningUser (String jsonwin,HashMap winnings){
+		String[] win;
+
+		win=jsonwin.split(",");
+
+		for(int i=0;i<win.length;i++){
+			String[] userWin;
+
+			userWin=win[i].split(":");
+			winnings.put(userWin[0],userWin[1]);
+		}
+
+	}
+
+	public HashMap<String, String> getWinnings() {
+		return winnings;
 	}
 }

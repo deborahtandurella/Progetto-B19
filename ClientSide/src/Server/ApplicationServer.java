@@ -2,6 +2,7 @@ package Server;
 import Server.servlets.AddPlayerServlet;
 import Server.servlets.CheckCardServlet;
 import Server.servlets.GetExtractionsServlet;
+import Server.servlets.WinningsServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -28,6 +29,7 @@ public class ApplicationServer {
             handler.addServlet(new ServletHolder(new AddPlayerServlet()), "/addplayer");
             handler.addServlet(new ServletHolder(new GetExtractionsServlet()), "/extractions");
             handler.addServlet(new ServletHolder(new CheckCardServlet()), "/checkcard");
+            handler.addServlet(new ServletHolder(new WinningsServlet()), "/winnings");
 
             server.setHandler(handler);
             server.start();

@@ -7,16 +7,20 @@ import com.Game.Tomboliere;
 import com.Game.controllers.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Sessione {
 
     private Tomboliere t;
     private ArrayList<Player> players;
     private static final int minPlayerCount=1;
+    private ArrayList<String> winnings;
 
     public Sessione() {
         t = new Tomboliere();
         players = new ArrayList<>();
+
+        winnings = new ArrayList<>();
 
     }
 
@@ -66,16 +70,22 @@ public class Sessione {
 
     public boolean checkCall(String username, int iCartella, CallEnum call, int LN) throws Exception {
 
-        int r = t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella),LN);
+        int r = t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella));
 
         if(r>=0 && r != 15) {
             players.get(findPlayer(username)).getCartella(iCartella).addWinningRow(r);
+            addWinning(players.get(findPlayer(username)),call);
             return true;
         }else if(r==15){
             players.get(findPlayer(username)).getCartella(iCartella).setInvalid();
+            addWinning(players.get(findPlayer(username)),call);
             return true;
        }
         return false;
+    }
+
+    private void addWinning(Player player, CallEnum call) {
+        winnings.add(player.getUsername()+":"+call.name());
     }
 
     private int findPlayer(String username) {
@@ -85,5 +95,10 @@ public class Sessione {
             }
         }
         return -1;
+    }
+
+    public ArrayList<String> getWinnings() {
+
+        return winnings;
     }
 }

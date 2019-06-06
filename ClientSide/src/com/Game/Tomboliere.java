@@ -68,13 +68,12 @@ public class Tomboliere {
 	 *
 	 * @param callType type of call made by a player
 	 * @param cartella the card of the player
-	 * @param LN
 	 * @return -1, if every type of call is wrong;
 	 * 			i, if one of the call: AMBO,TERNA,QUATERNA e CINQUINA is correct;
 	 * 			15, if the call TOMBOLA is correct.
 	 */
 
-	public synchronized int checkCall(CallEnum callType, Cartella cartella, int LN) {
+	public synchronized int checkCall(CallEnum callType, Cartella cartella) {
 
 
 		if(wins.contains(callType)) return -1;

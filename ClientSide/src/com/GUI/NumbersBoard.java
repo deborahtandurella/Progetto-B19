@@ -54,7 +54,7 @@ public class NumbersBoard extends GridPane {
                 int indice = cols + rows*10;
                 //labels.get(indice).setText(String.valueOf(indice));
                 this.add(labels.get(indice),cols,rows);
-                System.out.println(indice);
+                //System.out.println(indice);
             }
         }
 

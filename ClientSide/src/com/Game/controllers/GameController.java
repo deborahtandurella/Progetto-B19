@@ -6,6 +6,7 @@ import com.Game.Tomboliere;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 import com.sun.org.apache.regexp.internal.RE;
+import com.util.TextToSpeech;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -25,11 +26,18 @@ public class GameController {
 	private Thread estrattore;
 	private int n;
 	private String ipaddress = "localhost";
+	private int lastNum;
 
+	//Texttospeech
+	//private TextToSpeech tts;
 
 	public GameController(String playerName, int n) {
 
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
+
+		//tts = new TextToSpeech();
+		//tts.setVoice("istc-lucia-hsmm");
+
 
 		extractions = new ArrayList<>();
 		winnings = new HashMap<>();
@@ -38,7 +46,7 @@ public class GameController {
 
 		this.n = n;
 
-
+		//tts.speak("Ciao " + p.getUsername(),1.0f,false,false);
 
 
 	}
@@ -91,8 +99,8 @@ public class GameController {
 
 			int rcode = connection.getResponseCode();
 
-			System.out.println("\nSending 'GET' request to URL : " + url);
-			System.out.println("Response Code : " + rcode);
+			//System.out.println("\nSending 'GET' request to URL : " + url);
+			//System.out.println("Response Code : " + rcode);
 
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(connection.getInputStream()));
@@ -135,7 +143,11 @@ public class GameController {
 				winners=winners.substring(1,winners.length()-1);
 				takeWinningUser(winners,winnings);
 
-
+				if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
+					//Reproduce audio and update last num
+					lastNum = extractions.get(extractions.size()-1);
+					//tts.speak(String.valueOf(lastNum),1.0f,false,false);
+				}
 
 
 				updateFunction.run();

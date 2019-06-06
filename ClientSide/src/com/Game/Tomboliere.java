@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Class that manages the cards and extracts the cards
+ */
 public class Tomboliere {
 
+	//ArrayList of numbers that have been extracted
 	private ArrayList<Integer> numeriUsciti;
+
+	//Variable that generate casual numbers
 	private Random r;
+
+	//Arraylist of the winnings
 	private ArrayList<CallEnum> wins;
 
-
+	/**
+	 * Costruttore della classe Tomboliere
+	 */
 	public Tomboliere() {
 
 		numeriUsciti = new ArrayList<>();
@@ -19,8 +29,9 @@ public class Tomboliere {
 	}
 
 	/**
-	 * Estrattore numeri
-	 * @return ritorna un numero estratto
+	 * Number extractor
+	 *
+	 * @return an extracted number
 	 */
 	public synchronized Integer getNumber(){
 		int n;
@@ -35,13 +46,17 @@ public class Tomboliere {
 		return n;
 	}
 
+	/**
+	 * Get an ArrayList of extracted numbers
+	 */
 	public synchronized ArrayList<Integer> getExtractions(){
 		return numeriUsciti;
 	}
 
 	/**
-	 * Generatore nuova cartella
-	 * @return ritorna una nuova cartella
+	 * Generator of a new card
+	 *
+	 * @return a new card
 	 */
 
 	public Cartella getCartella() {
@@ -49,42 +64,46 @@ public class Tomboliere {
 	}
 
 	/**
-	 * Metodo che controlla la chiamata
-	 * @param callType tipo di chiamata (vedi CallEnum)
-	 * @return ritorna true se la chiamata è corretta altrimenti ritorna false;
+	 * It is called when is necessary to control the call made by a player
+	 *
+	 * @param callType type of call made by a player
+	 * @param cartella the card of the player
+	 * @param LN
+	 * @return -1, if every type of call is wrong;
+	 * 			i, if one of the call: AMBO,TERNA,QUATERNA e CINQUINA is correct;
+	 * 			15, if the call TOMBOLA is correct.
 	 */
 
 	public synchronized int checkCall(CallEnum callType, Cartella cartella, int LN) {
 
+
 		if(wins.contains(callType)) return -1;
 
-		//Controllo se la cartella è valida (ovvero non ho fatto tombola)
+		//Control if the card is valid (is valid when the player didn't make TOMBOLA)
 		if(cartella.isValidCard()){
 
 			//ArrayList<Integer> numeriUsciti= getSubExtractions(LN);
-			//Ottengo i numeri
+			//Obtain the numbers of a card
 			Integer[] numeri = cartella.getNumeri();
 
-			//Ottengo quanti numeri devono matchare per la chiamata (es. AMBO allora sono 2)
+			//Get how many numbers have to match for the call (eg AMBO then they are 2)
 			int matchN = getNumberForCallType(callType);
 
-			//Tengo traccia di quanti ne ho matchati
+			//Counter of matched numbers
 			int currN = 0;
 
-			//Controllo ambo,terna,quaterna,cinquina
+			//Control of AMBO,TERNA. QUATERNA, CINQUINA
 			for (int i = 0; i < 3; i++) {
 
-				//Giro riga per riga
+				//Save the numbers line by line
 				Integer[] tmpNum = Arrays.copyOfRange(numeri, 9 * i, 9 * i + 9);
 
-				//Azzero numeri matchati
 				currN = 0;
 
-
-				//Controllo riga per riga
+				//Control line by line
 				for (int j = 0; j < tmpNum.length; j++) {
 
-					//Se ho un numero che non è zero e che è contenuto nei numeri usciti, allora aggiungo 1 ai numeri matchati
+					//if there is a number not equal to 0 and it is in the extracted numbers, so increase by 1 the counter of matched numbers
 					if (tmpNum[j] != 0) {
 						if (numeriUsciti.contains(tmpNum[j])) {
 							currN++;
@@ -92,9 +111,9 @@ public class Tomboliere {
 					}
 				}
 
-				//Se ho matchato tanti numeri quanti sono quelli necessari per la chiamata e nella stessa riga non ho già avuto una vincita
+				//If are matched as many numbers as those that are needed for the call and in the same line I have not already had a win
+				//so add the winning line to the card and return the index of the line
 				if (currN >= matchN && cartella.isValidWinningRow(i)) {
-					//Allora aggiungo la riga vincente e ritorno indice riga
 					cartella.addWinningRow(i);
 					wins.add(callType);
 					return i;
@@ -103,21 +122,20 @@ public class Tomboliere {
 			}
 		}
 
+		//Control if a player made TOMBOLA
 		if(callType==CallEnum.TOMBOLA) {
-			//Controlla tombola
 			int currN = 0;
 
 			Integer[] numeri = cartella.getNumeri();
 
-			//Giro tutti i numeri
+			//cycle all the numbers of a card
 			for (int i = 0; i < 27; i++) {
-				//Se numeriUsciti contiene il numero della cartella ed è diverso da zero
 				if (numeriUsciti.contains(numeri[i]) && numeri[i] != 0) {
-					//Allora incremento contatore
 					currN++;
 				}
 			}
-			//Se ho matchato tutti i numeri allora ritorno true e setto la cartella come non valida
+
+			//If all numbers are matched, so return 15 and the card becomes invalid
 			if (currN >= 15) {
 				cartella.setInvalid();
 				return 15;
@@ -126,6 +144,7 @@ public class Tomboliere {
 
 		return -1;
 	}
+
 
 	private ArrayList<Integer> getSubExtractions(int LN) {
 		ArrayList<Integer> red=new ArrayList<>();

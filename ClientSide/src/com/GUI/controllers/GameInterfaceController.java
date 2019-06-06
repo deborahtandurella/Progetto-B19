@@ -84,7 +84,7 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.AMBO, index)){
             textField.setText("Complimenti hai fatto ambo!!");
             btn_ambo.setDisable(true);
-            btn_ambo.setText("Ambo: "+ logicController.getWinnings().get(0));
+            btn_ambo.setText("Ambo: "+ logicController.getWinnings().get("ambo".toUpperCase()));
         }
     }
 
@@ -92,7 +92,7 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.TERNA,index)){
             textField.setText("Complimenti hai fatto terna!!");
             btn_terna.setDisable(true);
-            btn_terna.setText("Terna: "+logicController.getWinnings().get(1));
+            btn_terna.setText("Terna: "+logicController.getWinnings().get("terna".toUpperCase()));
         }
     }
 
@@ -100,7 +100,7 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.QUATERNA, index)){
             textField.setText("Complimenti hai fatto quaterna!!");
             btn_quaterna.setDisable(true);
-            btn_quaterna.setText("Quaterna: "+ logicController.getWinnings().get(2));
+            btn_quaterna.setText("Quaterna: "+ logicController.getWinnings().get("quaterna".toUpperCase()));
         }
     }
 
@@ -109,7 +109,7 @@ public class GameInterfaceController implements Initializable {
             textField.setText("Complimenti hai fatto cinquina!!");
 
             btn_cinquina.setDisable(true);
-            btn_cinquina.setText("Cinquina: "+ logicController.getWinnings().get(3));
+            btn_cinquina.setText("Cinquina: "+ logicController.getWinnings().get("cinquina".toUpperCase()));
         }
     }
 
@@ -117,7 +117,7 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.TOMBOLA, index)){
             textField.setText("Complimenti hai fatto tombola!!");
             btn_tombola.setDisable(true);
-            btn_tombola.setText("Tombola: "+ logicController.getWinnings().get(4));
+            btn_tombola.setText("Tombola: "+ logicController.getWinnings().get("tombola".toUpperCase()));
         }
     }
 

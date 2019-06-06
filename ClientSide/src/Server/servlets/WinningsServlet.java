@@ -16,7 +16,7 @@ public class WinningsServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("application/json");
-
+        resp.setStatus(HttpServletResponse.SC_OK);
         ArrayList<String> winnings = ApplicationServer.s.getWinnings();
 
         String json = JsonStream.serialize(winnings);

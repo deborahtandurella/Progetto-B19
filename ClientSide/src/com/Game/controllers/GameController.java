@@ -129,7 +129,7 @@ public class GameController {
 				Any anyNums = JsonIterator.deserialize(nums);
 				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
 
-				String wins = connectHttpTo("http://\"+ipaddress+\":8282/winnings");
+				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 				Any anyWins = JsonIterator.deserialize(wins);
 				String winners = anyWins.get("winners").toString();
 				winners=winners.substring(1,winners.length()-1);
@@ -178,16 +178,17 @@ public class GameController {
 
 
 	private void takeWinningUser (String jsonwin,HashMap winnings){
-		String[] win;
+		String[] win= jsonwin.split(",");
 
-		win=jsonwin.split(",");
 
-		for(int i=0;i<win.length;i++){
-			String[] userWin;
 
-			userWin=win[i].split(":");
-			winnings.put(userWin[0],userWin[1]);
-		}
+
+			for (int i = 0; i < win.length; i++) {
+				String[] userWin = win[i].split(":");
+				if (userWin.length == 2) {
+					winnings.put(userWin[1], userWin[0]); //TODO modificare in modo da ottenere tramite la chiave il nome utente
+				}
+			}
 
 	}
 

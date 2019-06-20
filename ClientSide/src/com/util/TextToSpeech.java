@@ -1,3 +1,5 @@
+/*
+
 package com.util;
 
 import marytts.LocalMaryInterface;
@@ -17,18 +19,24 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+*/
+
 /**
  * @author GOXR3PLUS
  *
  */
+
+/*
 public class TextToSpeech {
 
     private AudioPlayer tts;
     private MaryInterface marytts;
-
+*/
     /**
      * Constructor
      */
+
+    /*
     public TextToSpeech() {
         try {
             marytts = new LocalMaryInterface();
@@ -37,6 +45,7 @@ public class TextToSpeech {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
+    */
 
     //----------------------GENERAL METHODS---------------------------------------------------//
 
@@ -54,6 +63,8 @@ public class TextToSpeech {
      *            <b>True</b> The current Thread calling this method will wait(blocked) until the Thread which is playing the Speech finish <br>
      *            <b>False</b> The current Thread calling this method will continue freely after calling this method
      */
+
+    /*
     public void speak(String text , float gainValue , boolean daemon , boolean join) {
 
         // Stop the previous player
@@ -80,15 +91,19 @@ public class TextToSpeech {
             tts.interrupt();
         }
     }
+*/
 
     /**
      * Stop the MaryTTS from Speaking
      */
+
+    /*
     public void stopSpeaking() {
         // Stop the previous player
         if (tts != null)
             tts.cancel();
     }
+    */
 
     //----------------------GETTERS---------------------------------------------------//
 
@@ -97,25 +112,34 @@ public class TextToSpeech {
      *
      * @return The available voices for MaryTTS
      */
+
+    /*
     public Collection<Voice> getAvailableVoices() {
         return Voice.getAvailableVoices();
     }
+    */
 
     /**
      * @return the marytts
      */
+
+    /*
     public MaryInterface getMarytts() {
         return marytts;
     }
+    */
 
     /**
      * Return a list of available audio effects for MaryTTS
      *
      * @return
      */
+
+    /*
     public List<AudioEffect> getAudioEffects() {
         return StreamSupport.stream(AudioEffects.getEffects().spliterator(), false).collect(Collectors.toList());
     }
+    */
 
     //----------------------SETTERS---------------------------------------------------//
 
@@ -124,8 +148,11 @@ public class TextToSpeech {
      *
      * @param voice
      */
+
+    /*
     public void setVoice(String voice) {
         marytts.setVoice(voice);
     }
 
 }
+*/

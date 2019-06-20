@@ -23,7 +23,7 @@ public class NumbersBoard extends GridPane {
             this.getRowConstraints().add(new RowConstraints(60));
         }
 
-        this.setStyle("-fx-border-color: black; -fx-grid-lines-visible: true");
+        this.setStyle("-fx-border-color: black; -fx-grid-lines-visible: true; -fx-font-size: 30; -fx-text-fill: white");
 
         this.getStylesheets().add("./resources/Style.CSS");
 

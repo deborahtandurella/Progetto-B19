@@ -22,6 +22,11 @@
     -fx-padding: 10px;
     -fx-font-size: 0.75em;
 }
+
 .extracted {
     -fx-background-color: #dd0000;
+}
+
+.button:hover{
+    -fx-cursor: hand;
 }

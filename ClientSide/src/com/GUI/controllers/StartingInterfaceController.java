@@ -5,6 +5,10 @@ import com.GUI.NumbersBoard;
 import com.Game.Cartella;
 import com.Game.CartellaFactory;
 import com.Game.controllers.GameController;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,17 +19,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
+import javafx.util.Duration;
+
 import java.lang.Exception;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StartingInterfaceController implements Initializable {
+
+    @FXML
+    StackPane rootPane;
+
+    @FXML
+    AnchorPane anchorRoot;
 
     @FXML
     Button btn;
@@ -70,6 +83,21 @@ public class StartingInterfaceController implements Initializable {
         AnchorPane a = (AnchorPane) root.getChildren().get(root.getChildren().size()-1);
 
         a.getChildren().add(numbersBoard);
+
+/*
+        Scene scene = btn.getScene();
+        root.translateYProperty().set(scene.getHeight());
+        rootPane.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.millis(1000), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(event1 -> {
+            rootPane.getChildren().remove(anchorRoot);
+        });
+        timeline.play();
+*/
 
 
         Stage currStage = (Stage) textField.getScene().getWindow();

@@ -10,33 +10,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="530.0" id="back" style=" -fx-background-size: cover;" stylesheets="@StartingInterfaceStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GUI.controllers.StartingInterfaceController">
+
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GUI.controllers.StartingInterfaceController">
    <children>
-      <VBox alignment="BOTTOM_CENTER" layoutX="165.0" layoutY="334.0" prefHeight="66.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="334.0">
+      <AnchorPane id="back" fx:id="anchorRoot" prefHeight="400.0" prefWidth="530.0" style=" -fx-background-size: cover;" stylesheets="@StartingInterfaceStyle.css">
          <children>
-            <Button fx:id="btn" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-alignment: center; -fx-cursor: hand;" text="Play" textFill="#0d0996">
-               <font>
-                  <Font name="Phosphate Inline" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Button>
+            <VBox alignment="BOTTOM_CENTER" layoutX="165.0" layoutY="334.0" prefHeight="66.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="334.0">
+               <children>
+                  <Button fx:id="btn" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-alignment: center; -fx-cursor: hand;" text="Play" textFill="#0d0996">
+                     <font>
+                        <Font name="Phosphate Inline" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox alignment="TOP_CENTER" layoutX="113.0" prefHeight="100.0" prefWidth="316.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ComboBox fx:id="comboBox" prefHeight="40.0" prefWidth="150.0" promptText="Cards number">
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <TextField fx:id="textField" prefHeight="42.0" prefWidth="167.0" promptText="Username">
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
          </children>
-      </VBox>
-      <HBox layoutX="113.0" prefHeight="100.0" prefWidth="316.0">
-         <children>
-            <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="Cards number">
-               <HBox.margin>
-                  <Insets top="30.0" />
-               </HBox.margin>
-            </ComboBox>
-            <TextField fx:id="textField" promptText="Username">
-               <HBox.margin>
-                  <Insets top="30.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

@@ -9,49 +9,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorRoot" prefHeight="799.0" prefWidth="1500.0" stylesheets="@GameInterfaceStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="anchorRoot" prefHeight="799.0" prefWidth="1100.0" stylesheets="@GameInterfaceStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="anchor" layoutX="15.0" layoutY="103.0" prefHeight="254.0" prefWidth="847.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="103.0" />
-      <Button fx:id="btn_ambo" layoutX="15.0" layoutY="470.0" mnemonicParsing="false" onAction="#amboEvent" prefHeight="71.0" prefWidth="142.0" text="Ambo" AnchorPane.leftAnchor="15.0">
+      <AnchorPane fx:id="anchor" layoutX="45.0" layoutY="103.0" prefHeight="254.0" prefWidth="747.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="103.0" />
+      <Button fx:id="btn_ambo" layoutX="68.0" layoutY="470.0" mnemonicParsing="false" onAction="#amboEvent" prefHeight="71.0" prefWidth="142.0" text="Ambo" AnchorPane.leftAnchor="68.0">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_terna" layoutX="174.0" layoutY="470.0" mnemonicParsing="false" onAction="#ternaEvent" prefHeight="71.0" prefWidth="142.0" text="TERNA">
+      <Button fx:id="btn_terna" layoutX="232.0" layoutY="470.0" mnemonicParsing="false" onAction="#ternaEvent" prefHeight="71.0" prefWidth="142.0" text="TERNA">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_quaterna" layoutX="336.0" layoutY="470.0" mnemonicParsing="false" onAction="#quaternaEvent" prefHeight="71.0" prefWidth="142.0" text="QUATERNA">
+      <Button fx:id="btn_quaterna" layoutX="395.0" layoutY="470.0" mnemonicParsing="false" onAction="#quaternaEvent" prefHeight="71.0" prefWidth="142.0" text="QUATERNA">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_cinquina" layoutX="499.0" layoutY="470.0" mnemonicParsing="false" onAction="#cinquinaEvent" prefHeight="71.0" prefWidth="142.0" text="CINQUINA">
+      <Button fx:id="btn_cinquina" layoutX="565.0" layoutY="470.0" mnemonicParsing="false" onAction="#cinquinaEvent" prefHeight="71.0" prefWidth="142.0" text="CINQUINA">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_tombola" layoutX="15.0" layoutY="562.0" mnemonicParsing="false" onAction="#tombolaEvent" prefHeight="100.0" prefWidth="626.0" text="TOMBOLA!">
+      <Button fx:id="btn_tombola" layoutX="68.0" layoutY="562.0" mnemonicParsing="false" onAction="#tombolaEvent" prefHeight="100.0" prefWidth="626.0" text="TOMBOLA!">
          <font>
             <Font name="Phosphate Inline" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_previous" layoutX="26.0" layoutY="377.0" mnemonicParsing="false" onAction="#previousButton" prefHeight="50.0" prefWidth="121.0" text="Previous">
+      <Button fx:id="btn_previous" layoutX="68.0" layoutY="377.0" mnemonicParsing="false" onAction="#previousButton" prefHeight="50.0" prefWidth="121.0" text="Previous">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_next" layoutX="538.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="50.0" prefWidth="103.0" text="Next">
+      <Button fx:id="btn_next" layoutX="604.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="50.0" prefWidth="103.0" text="Next">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="textField" layoutX="174.0" layoutY="377.0" prefHeight="50.0" prefWidth="350.0">
+      <TextField fx:id="textField" layoutX="220.0" layoutY="377.0" prefHeight="50.0" prefWidth="350.0">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </TextField>
-      <AnchorPane id="anchor2" fx:id="anchor2" layoutX="879.0" layoutY="103.0" prefHeight="898.0" prefWidth="680.0" />
+      <AnchorPane id="anchor2" fx:id="anchor2" layoutX="792.0" layoutY="103.0" prefHeight="898.0" prefWidth="707.0" />
    </children>
 </AnchorPane>

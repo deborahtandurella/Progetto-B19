@@ -84,28 +84,34 @@ public class StartingInterfaceController implements Initializable {
 
         a.getChildren().add(numbersBoard);
 
-/*
+
         Scene scene = btn.getScene();
-        root.translateYProperty().set(scene.getHeight());
+        root.translateXProperty().set(scene.getWidth());
         rootPane.getChildren().add(root);
 
         Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.millis(1000), kv);
+        KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.millis(1500), kv);
         timeline.getKeyFrames().add(kf);
         timeline.setOnFinished(event1 -> {
             rootPane.getChildren().remove(anchorRoot);
         });
         timeline.play();
-*/
+
+        Stage currStage = (Stage) scene.getWindow();
+        currStage.setScene(scene);
+        currStage.setOnCloseRequest(e -> handleClose());
+        currStage.show();
+        currStage.setMaximized(true);
 
 
+/*
         Stage currStage = (Stage) textField.getScene().getWindow();
         currStage.setScene(new Scene(root, 800, 560));
         currStage.setOnCloseRequest(e -> handleClose());
         currStage.show();
-
-
+        currStage.setMaximized(true);
+*/
 
     }
 

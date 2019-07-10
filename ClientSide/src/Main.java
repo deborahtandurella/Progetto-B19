@@ -10,8 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-
+/**
+ * Class that setup and execute the simulation.
+ */
 public class Main extends Application {
+
+    /**
+     * Main method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
        /* Client client =  new Client();
 
@@ -21,6 +29,12 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * Start the main menu
+     *
+     * @param primaryStage stage of the main menu
+     * @throws Exception error of loading the stage
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("resources/MenuStage.fxml"));
@@ -44,7 +58,7 @@ public class Main extends Application {
 
         //scene.getStylesheets().add(this.getClass().getResource("resources/Style.CSS").toExternalForm() );
 
-
+        //Load and start the main menu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/StartingInterface.fxml"));
 
 

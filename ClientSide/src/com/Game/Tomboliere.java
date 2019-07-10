@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Class that manages the cards and extracts the cards
+ * Class that manages the cards and check the cards
  */
 public class Tomboliere {
 

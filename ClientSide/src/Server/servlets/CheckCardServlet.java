@@ -10,23 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * (servlet) Control the request of a player checking the card
+ */
 public class CheckCardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("application/json");
 
-        //esempio: U=username&C=1&CT=AMBO
+        ////String from request. Ex:U=username,N(number of cards)=1,CT=AMBO,LN(last number released)=56
         String queryString = req.getQueryString();
 
-        //esempio: U=username,N=1,CT=AMBO,LN=ultimo numero uscito
+        //Parsing the string
         String[] params = queryString.split("&");
 
         try {
-            //Controllo stringhe
+            //Control the strings
             if(params[0].startsWith("U=") && params[1].startsWith("C=") && params[2].startsWith("CT=") && params[3].startsWith("LN=")){
 
-                //Ottengo i parametri
+                //Obtain the parameters
                 String username = params[0].substring(2);
                 int iCartella = Integer.parseInt(params[1].substring(2));
 

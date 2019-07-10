@@ -32,7 +32,7 @@ public class Main extends Application {
     /**
      * Start the main menu
      *
-     * @param primaryStage stage of the main menu
+     * @param primaryStage  stage of the main menu
      * @throws Exception error of loading the stage
      */
     @Override

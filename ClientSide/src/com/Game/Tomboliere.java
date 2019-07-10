@@ -19,7 +19,7 @@ public class Tomboliere {
 	private ArrayList<CallEnum> wins;
 
 	/**
-	 * Costruttore della classe Tomboliere
+	 * Constructor of the class Tomboliere
 	 */
 	public Tomboliere() {
 

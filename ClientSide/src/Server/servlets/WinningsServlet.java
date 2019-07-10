@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * (servlet) Manage the winnings
+ */
+
 public class WinningsServlet extends HttpServlet{
 
     @Override
@@ -17,6 +21,8 @@ public class WinningsServlet extends HttpServlet{
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
+
+        //Winnings in a game (ambo,terna etc..)
         ArrayList<String> winnings = ApplicationServer.s.getWinnings();
 
         String json = JsonStream.serialize(winnings);

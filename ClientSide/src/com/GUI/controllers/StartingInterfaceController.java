@@ -32,6 +32,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * The controller of the graphic of the starting interface
+ */
 public class StartingInterfaceController implements Initializable {
 
     @FXML

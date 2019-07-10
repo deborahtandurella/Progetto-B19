@@ -4,6 +4,9 @@ import com.jsoniter.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
+/**
+ * Rapresents a generic card
+ */
 public class Cartella {
 
 	//Numbers in a card

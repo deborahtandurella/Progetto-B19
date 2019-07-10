@@ -24,6 +24,9 @@ import java.util.ResourceBundle;
 
 //successivamente da aggiustare con un input di più cartella
 
+/**
+ * The controller of the graphic of the game
+ */
 public class GameInterfaceController implements Initializable {
 
     @FXML

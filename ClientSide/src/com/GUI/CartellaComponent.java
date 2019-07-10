@@ -7,10 +7,16 @@ import javafx.scene.layout.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Create the card
+ */
 public class CartellaComponent extends GridPane {
 
     private ArrayList<Button> bottoni;
 
+    /**
+     * Set the general view of the card
+     */
     public CartellaComponent() {
         super();
 
@@ -40,7 +46,11 @@ public class CartellaComponent extends GridPane {
 
     }
 
-
+    /**
+     * Set the number of the cell of a table
+     *
+     * @param numeri numbers assigned to a card
+     */
     public void setNumeri(Integer[] numeri){
 
         for (int rows = 0; rows < 3; rows++) {

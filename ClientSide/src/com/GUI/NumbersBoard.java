@@ -8,6 +8,9 @@ import javafx.scene.layout.RowConstraints;
 
 import java.util.ArrayList;
 
+/**
+ * Show a table of extracted numbers
+ */
 public class NumbersBoard extends GridPane {
 
     private ArrayList<Label> labels;

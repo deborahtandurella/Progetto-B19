@@ -11,12 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * Class that setup and execute the simulation.
+ * Class that setup and execute the simulation of the client.
  */
 public class Main extends Application {
 
     /**
-     * Main method
+     * Main client method
      *
      * @param args
      */

@@ -11,20 +11,41 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 import javax.servlet.Servlet;
 
+/**
+ * Setup the connection and the element of the game for the server
+ */
 public class ApplicationServer {
 
+        //Port number for the connection
         private int port;
+
+        //Server of the game
         private Server server;
 
+        //Create a new game session
         public static final Sessione s = new Sessione();
 
-
-        public ApplicationServer(int port) {
+    /**
+     * Constructor method of the server
+     *
+     * @param port port number
+     */
+    public ApplicationServer(int port) {
             this.port = port;
         }
 
-        public void start() throws Exception {
+
+    /**
+     *Setup and create the server
+     *
+     * @throws Exception
+     */
+    public void start() throws Exception {
+
+            //Create the server
             server = new Server(port);
+
+            //Setup the handler
             ServletContextHandler handler = new ServletContextHandler();
             handler.addServlet(new ServletHolder(new AddPlayerServlet()), "/addplayer");
             handler.addServlet(new ServletHolder(new GetExtractionsServlet()), "/extractions");
@@ -35,7 +56,13 @@ public class ApplicationServer {
             server.start();
         }
 
-        public void stop() throws Exception {
+
+    /**
+     * Stop the server
+     *
+     * @throws Exception
+     */
+    public void stop() throws Exception {
             server.stop();
         }
     }

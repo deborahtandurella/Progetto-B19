@@ -1,5 +1,5 @@
 .button:hover{
-	-fx-effect: innershadow(gaussian, blue, 10, 0, 0, 0);
+	-fx-effect: innershadow(gaussian, goldenrod, 10, 0, 0, 0);
 	-fx-cursor: hand;
 }
 
@@ -10,7 +10,7 @@
 }
 
 #back {
-	-fx-background-image: url("./Tombola3.jpg");
+	-fx-background-image: url("./StartingImg.jpg");
 }
 
 

@@ -16,10 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -32,6 +34,7 @@ import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import org.omg.CORBA.Object;
 
+import java.awt.event.KeyEvent;
 import java.lang.Exception;
 import java.net.URL;
 import java.util.ArrayList;
@@ -68,8 +71,6 @@ public class StartingInterfaceController implements Initializable {
     private String username;
     private GameController gc;
     private ArrayList<CartellaComponent> listaCartelle;
-
-
 
     ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6");
 
@@ -168,5 +169,8 @@ public class StartingInterfaceController implements Initializable {
 
             }
         });
+
+        //It permits to press ENTER instead to click on PLAY
+        btn.setDefaultButton(true);
     }
 }

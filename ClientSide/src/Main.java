@@ -4,11 +4,18 @@ import com.GUI.controllers.StartingInterfaceController;
 import com.Game.Cartella;
 import com.Game.CartellaFactory;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Class that setup and execute the simulation of the client.
@@ -65,6 +72,15 @@ public class Main extends Application {
         Parent parent = loader.load();
         Scene scene = new Scene(parent,600,400);
 
+        //Press ESC to close the window
+        scene.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, new EventHandler<javafx.scene.input.KeyEvent>() {
+            @Override
+            public void handle(javafx.scene.input.KeyEvent event) {
+                if (event.getCode() == KeyCode.ESCAPE){
+                    primaryStage.close();
+                }
+            }
+        });
 
         primaryStage.setTitle("Tombola Game!");
         primaryStage.setScene(scene);

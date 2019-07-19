@@ -9,6 +9,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,18 +21,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
+import org.omg.CORBA.Object;
 
 import java.lang.Exception;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableBooleanValue;
 
 /**
  * The controller of the graphic of the starting interface
@@ -47,6 +53,12 @@ public class StartingInterfaceController implements Initializable {
     Button btn;
 
     @FXML
+    VBox vbox;
+
+    @FXML
+    HBox hbox;
+
+    @FXML
     TextField textField;
 
     @FXML
@@ -61,6 +73,7 @@ public class StartingInterfaceController implements Initializable {
 
     ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6");
 
+    //Funzione che permette di passare all'interfaccia successiva
     @FXML
     public void buttonEvent(ActionEvent event) throws Exception {
 
@@ -78,7 +91,7 @@ public class StartingInterfaceController implements Initializable {
         numbersBoard.initNumbers();
 
 
-
+        //carica l'interfaccia successiva
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/GameInterface.fxml"));
 
         loader.setController(new GameInterfaceController(listaCartelle,gc));
@@ -92,6 +105,7 @@ public class StartingInterfaceController implements Initializable {
         root.translateXProperty().set(scene.getWidth());
         rootPane.getChildren().add(root);
 
+        //proprietà di transizione della nuova interfaccia
         Timeline timeline = new Timeline();
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(1500), kv);
@@ -106,7 +120,6 @@ public class StartingInterfaceController implements Initializable {
         currStage.setOnCloseRequest(e -> handleClose());
         currStage.show();
         currStage.setMaximized(true);
-
 
 /*
         Stage currStage = (Stage) textField.getScene().getWindow();
@@ -128,5 +141,32 @@ public class StartingInterfaceController implements Initializable {
         comboBox.setItems(list);
         listaCartelle = new ArrayList<>();
 
+        //element resizing in front of a box resizing
+        vbox.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double width = (double) newValue;
+                btn.setPrefWidth(width/2);
+                
+            }
+        });
+
+        hbox.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double width = (double) newValue;
+                textField.setPrefWidth(width/4);
+
+            }
+        });
+
+        hbox.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double width = (double) newValue;
+                comboBox.setPrefWidth(width/4);
+
+            }
+        });
     }
 }

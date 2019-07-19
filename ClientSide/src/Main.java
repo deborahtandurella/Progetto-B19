@@ -70,7 +70,7 @@ public class Main extends Application {
 
 
         Parent parent = loader.load();
-        Scene scene = new Scene(parent,600,400);
+        Scene scene = new Scene(parent,800, 500);
 
         //Press ESC to close the window
         scene.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, new EventHandler<javafx.scene.input.KeyEvent>() {

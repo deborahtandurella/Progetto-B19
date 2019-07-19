@@ -35,12 +35,12 @@
                   </Button>
                </children>
             </VBox>
-            <HBox fx:id="hbox" alignment="TOP_CENTER" layoutX="113.0" prefHeight="100.0" prefWidth="316.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="hbox" alignment="TOP_CENTER" layoutX="59.0" prefHeight="122.0" prefWidth="652.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="122.0" prefWidth="611.0">
+                  <AnchorPane prefHeight="122.0" prefWidth="655.0">
                      <children>
                         <ComboBox fx:id="comboBox" layoutY="30.0" prefHeight="40.0" prefWidth="150.0" promptText="Cards number" />
-                        <TextField fx:id="textField" layoutX="410.0" layoutY="29.0" prefHeight="42.0" prefWidth="167.0" promptText="Username" AnchorPane.leftAnchor="410.0">
+                        <TextField fx:id="textField" layoutX="462.0" layoutY="29.0" prefHeight="42.0" prefWidth="167.0" promptText="Username" AnchorPane.leftAnchor="462.0">
                            <font>
                               <Font name="Helvetica" size="13.0" />
                            </font>

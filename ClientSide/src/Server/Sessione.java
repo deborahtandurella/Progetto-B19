@@ -9,13 +9,27 @@ import com.Game.controllers.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Class that manages the game session
+ */
 public class Sessione {
 
+    //The manager of the game
     private Tomboliere t;
+
+    //Players of the session
     private ArrayList<Player> players;
+
+    //Minimum number of the player of a session=1
     private static final int minPlayerCount=1;
+
+    //Winings in the session
     private ArrayList<String> winnings;
 
+
+    /**
+     * Constructor of the class Sessione
+     */
     public Sessione() {
         t = new Tomboliere();
         players = new ArrayList<>();
@@ -25,7 +39,12 @@ public class Sessione {
     }
 
 
+    /**
+     * Start the extraction of the numbers
+     */
     public void startExtractor(){
+
+        //Manage the waiting time between the extractions
         Thread extractor = new Thread(() -> {
             try {
                 Thread.sleep(2000);
@@ -46,32 +65,60 @@ public class Sessione {
         extractor.start();
     }
 
+    /**
+     * Add a player to the session
+     *
+     * @param username name of the player
+     * @param n number of cards
+     * @return the new player of the session (temporary because it will be deleted at the end of the game)
+     */
     public Player addPLayer(String username, int n){
 
+        //A player of the session
         Player tmpPlayer = new Player(username);
 
+        //Assign the cards to the player
         for (int i = 0; i < n; i++) {
             tmpPlayer.addCartella(CartellaFactory.createCartella());
         }
 
+        //Add the player to the list of players
         players.add(tmpPlayer);
+
+        //Check if there are the conditions to start the extractions
         if(players.size()==minPlayerCount){
             startExtractor();
         }
         return tmpPlayer;
-
-
     }
 
-
+    /**
+     * Get the number come out
+     *
+     * @return the numbers extracted
+     */
     public ArrayList<Integer> getExtractions() {
         return t.getExtractions();
     }
 
+
+    /**
+     * Check if the winning call(ambo,terna, ecc..) from a player is right
+     *
+     * @param username the name of the player
+     * @param iCartella index of the card
+     * @param call type of the call
+     * @param LN last number released
+     *
+     * @return true if the call is right; false if the call is wrong
+     * @throws Exception
+     */
     public boolean checkCall(String username, int iCartella, CallEnum call, int LN) throws Exception {
 
+        //Use the checkCall method of the Tomboliere
         int r = t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella));
 
+        //Control if there are the conditions of the call
         if(r>=0 && r != 15) {
             players.get(findPlayer(username)).getCartella(iCartella).addWinningRow(r);
             addWinning(players.get(findPlayer(username)),call);
@@ -84,10 +131,23 @@ public class Sessione {
         return false;
     }
 
+    /**
+     * Add the winning to the arraylist of winnings
+     *
+     * @param player that makes the winning
+     * @param call the type of winning
+     */
     private void addWinning(Player player, CallEnum call) {
         winnings.add(player.getUsername()+":"+call.name());
     }
 
+    /**
+     * Search a player in the session
+     *
+     * @param username of the searched player
+     * @return the index of the player in the Arraylist of the players of the session, if there is that player in the session
+     *         -1, if there isn't that player in the session
+     */
     private int findPlayer(String username) {
         for (int i = 0; i < players.size(); i++) {
             if(players.get(i).getUsername().equals(username)) {
@@ -97,8 +157,12 @@ public class Sessione {
         return -1;
     }
 
+    /**
+     * Get the winnings of a session
+     *
+     * @return Arraylist of winnings
+     */
     public ArrayList<String> getWinnings() {
-
         return winnings;
     }
 }

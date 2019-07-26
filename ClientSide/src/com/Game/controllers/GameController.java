@@ -6,10 +6,13 @@ import com.Game.Tomboliere;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 import com.sun.org.apache.regexp.internal.RE;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 // import com.util.TextToSpeech;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -146,6 +149,13 @@ public class GameController {
 				if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
 					//Reproduce audio and update last num
 					lastNum = extractions.get(extractions.size()-1);
+
+					String bip = "src/resources/BipSound.mp3";
+					Media hit = new Media(new File(bip).toURI().toString());
+					MediaPlayer mediaPlayer = new MediaPlayer(hit);
+					mediaPlayer.play();
+
+
 					//tts.speak(String.valueOf(lastNum),1.0f,false,false);
 				}
 

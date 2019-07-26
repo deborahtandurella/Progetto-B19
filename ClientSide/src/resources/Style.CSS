@@ -18,13 +18,15 @@
 }
 
 .labeldef {
+    -fx-text-fill: #bbbbbb;
     -fx-text-alignment: center;
     -fx-padding: 10px;
     -fx-font-size: 0.75em;
 }
 
 .extracted {
-    -fx-background-color: #dd0000;
+    -fx-background-color: #dd9900;
+    -fx-text-fill: #111111;
 }
 
 .button:hover{

@@ -17,7 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -87,7 +90,11 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.AMBO, index)){
             textField.setText("Complimenti hai fatto ambo!!");
             btn_ambo.setDisable(true);
-            btn_ambo.setText("Ambo: "+ logicController.getWinnings().get("ambo".toUpperCase()));
+            btn_ambo.setText("Ambo: "+ logicController.getPlayerName());
+            String bip = "src/resources/cheer.mp3";
+            Media hit = new Media(new File(bip).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
     }
 
@@ -95,7 +102,11 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.TERNA,index)){
             textField.setText("Complimenti hai fatto terna!!");
             btn_terna.setDisable(true);
-            btn_terna.setText("Terna: "+logicController.getWinnings().get("terna".toUpperCase()));
+            btn_terna.setText("Terna: "+ logicController.getPlayerName());
+            String bip = "src/resources/cheer.mp3";
+            Media hit = new Media(new File(bip).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
     }
 
@@ -103,7 +114,11 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.QUATERNA, index)){
             textField.setText("Complimenti hai fatto quaterna!!");
             btn_quaterna.setDisable(true);
-            btn_quaterna.setText("Quaterna: "+ logicController.getWinnings().get("quaterna".toUpperCase()));
+            btn_quaterna.setText("Quaterna: "+  logicController.getPlayerName());
+            String bip = "src/resources/cheer.mp3";
+            Media hit = new Media(new File(bip).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
     }
 
@@ -112,7 +127,11 @@ public class GameInterfaceController implements Initializable {
             textField.setText("Complimenti hai fatto cinquina!!");
 
             btn_cinquina.setDisable(true);
-            btn_cinquina.setText("Cinquina: "+ logicController.getWinnings().get("cinquina".toUpperCase()));
+            btn_cinquina.setText("Cinquina: "+  logicController.getPlayerName());
+            String bip = "src/resources/cheer.mp3";
+            Media hit = new Media(new File(bip).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
     }
 
@@ -120,7 +139,11 @@ public class GameInterfaceController implements Initializable {
         if (logicController.buttonControl(btnValue.TOMBOLA, index)){
             textField.setText("Complimenti hai fatto tombola!!");
             btn_tombola.setDisable(true);
-            btn_tombola.setText("Tombola: "+ logicController.getWinnings().get("tombola".toUpperCase()));
+            btn_tombola.setText("Tombola: "+  logicController.getPlayerName());
+            String bip = "src/resources/cheer.mp3";
+            Media hit = new Media(new File(bip).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
         }
     }
 

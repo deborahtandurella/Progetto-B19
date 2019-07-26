@@ -46,15 +46,15 @@ public class Sessione {
 
         //Manage the waiting time between the extractions
         Thread extractor = new Thread(() -> {
-            try {
+            /*try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             while (true){
                 System.out.println(t.getNumber());
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

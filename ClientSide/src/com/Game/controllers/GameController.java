@@ -130,7 +130,7 @@ public class GameController {
 			while (true){
 
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -143,6 +143,7 @@ public class GameController {
 				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 				Any anyWins = JsonIterator.deserialize(wins);
 				String winners = anyWins.get("winners").toString();
+				System.out.println(winners);
 				winners=winners.substring(1,winners.length()-1);
 				takeWinningUser(winners,winnings);
 
@@ -216,5 +217,9 @@ public class GameController {
 
 	public HashMap<String, String> getWinnings() {
 		return winnings;
+	}
+
+	public String getPlayerName() {
+		return p.getUsername();
 	}
 }

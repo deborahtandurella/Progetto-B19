@@ -30,6 +30,7 @@ public class GameController {
 	private int n;
 	private String ipaddress = "localhost";
 	private int lastNum;
+	private String lastWinningPhrase;
 
 	//Texttospeech
 	//private TextToSpeech tts;
@@ -210,6 +211,7 @@ public class GameController {
 				String[] userWin = win[i].split(":");
 				if (userWin.length == 2) {
 					winnings.put(userWin[1], userWin[0]); //TODO modificare in modo da ottenere tramite la chiave il nome utente
+					lastWinningPhrase = userWin[0] + " ha fatto " + userWin[1];
 				}
 			}
 
@@ -221,5 +223,9 @@ public class GameController {
 
 	public String getPlayerName() {
 		return p.getUsername();
+	}
+
+	public String getLastWinningPhrase() {
+		return lastWinningPhrase;
 	}
 }

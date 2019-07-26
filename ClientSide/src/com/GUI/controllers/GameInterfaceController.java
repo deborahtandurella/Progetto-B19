@@ -206,7 +206,8 @@ public class GameInterfaceController implements Initializable {
 
         numbersBoard.updateGrid(extractions);
 
-        textField.setText("Numero estratto: " + extractions.get(extractions.size()-1));
+        textField.setText(logicController.getLastWinningPhrase());
+
     }
 
 }

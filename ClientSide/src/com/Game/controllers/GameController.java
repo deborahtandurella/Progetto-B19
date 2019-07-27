@@ -21,22 +21,49 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Create and set the methods to manage the game in client and server side
+ */
 public class GameController {
 
+    //Player of a game
 	private Player p;
+
+    //Numbers that has been extracted
 	private ArrayList<Integer> extractions;
+
+    //Winnings of a game
 	private HashMap<String,String> winnings;
+
+    //Extractor of the numbers
 	private Thread estrattore;
+
+    //Number of cards of a player
 	private int n;
+
+    //The ip address to that the client has to connect to join a game session
 	private String ipaddress = "localhost";
+
+	//Last number that has been extracted
 	private int lastNum;
+
+	//The phrase that will be displayed when a player will make any type winning
 	private String lastWinningPhrase;
 
 	//Texttospeech
 	//private TextToSpeech tts;
 
+
+
+    /**
+     * Constructor of the class GameController
+     *
+     * @param playerName username of a player
+     * @param n numbers of cards of a player
+     */
 	public GameController(String playerName, int n) {
 
+        //Set the json of the player
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		//tts = new TextToSpeech();
@@ -55,6 +82,13 @@ public class GameController {
 
 	}
 
+    /**
+     * Traslate the player information from Json to object
+     *
+     * @param playerJson json of the player
+     * @param n numbers of cards
+     * @return p the istance of Player
+     */
 	private Player deserializePlayer(String playerJson, int n) {
 		//Parsing json
 		Any anyClass = JsonIterator.deserialize(playerJson);
@@ -63,8 +97,10 @@ public class GameController {
 
 		Any cards = anyClass.get("cartelle");
 
+        //Create a player
 		Player p = new Player(uName);
 
+        //Set the card of the player
 		for (int i = 0; i < n; i++) {
 			Any card = cards.get(i);
 			String numbers = String.valueOf(card.get("numeri"));
@@ -73,30 +109,43 @@ public class GameController {
 			p.addCartella(new Cartella(numArr));
 
 		}
-
-
-
 		return p;
-
 	}
 
+
+    /**
+     * Translate the string of numbers to an Arraylist of numbers
+     *
+     * @param numbers String of numbers
+     * @return Arraylist of numbers
+     */
 	private ArrayList<Integer> string2Array(String numbers) {
+
+        //Parsing the string
 		String num = numbers.substring(1,numbers.length()-1);
 		String[] nums = num.split(",");
 
+        //Create and add the numbers to the Arraylist
 		ArrayList<Integer> numsArr = new ArrayList<>();
 
 		for (int i = 0; i < nums.length; i++) {
 			numsArr.add(Integer.valueOf(nums[i]));
 		}
-
-
 		return numsArr;
 	}
 
+    /**
+     * Set the connection to the Http server
+     *
+     * @param url address of the server
+     * @return the response, if the connection is successful
+     * 		   null, in the other case
+     */
 	private String  connectHttpTo(String url) {
 
 		try {
+
+            //Set and initialize the connection
 			URL connectionUrl = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
 			connection.setRequestMethod("GET");
@@ -124,8 +173,15 @@ public class GameController {
 		return null;
 	}
 
-
+    /**
+     * Start the extraction of the numbers of a game
+     * TODO: commentare singolarmente il codice
+     *
+     * @param updateFunction
+     */
 	public void startExtraction(Runnable updateFunction) {
+
+        //Set and initialize the extractor
 		estrattore = new Thread(() -> {
 
 			while (true){
@@ -169,6 +225,10 @@ public class GameController {
 		estrattore.start();
 	}
 
+
+    /**
+     *Stop the extraction of the numbers
+     */
 	public void stopExtractions(){
 		estrattore.interrupt();
 		estrattore.stop();
@@ -178,9 +238,27 @@ public class GameController {
 	public Cartella getCartella(int index) {
 		return p.getCartella(index);
 	}
+
+    /**
+     * Convert a card in an Array of numbers
+     *
+     * @param index of the card
+     * @return Array of the numbers of a card
+     */
 	public Integer[] getCartellaAsArray(int index) {return p.getCartella(index).getNumeri();}
 
+    /**
+     * Send information of a player to the server if he presses a winning button
+     *
+     * @param callEnum the type of winning call
+     * @param iCartella index of the card
+     * @return true, if the response is correct
+     *         false, if the response is null
+     * @throws NullPointerException
+     */
 	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
+
+	    //Set and initialize the response
 		String resp;
 		resp=connectHttpTo("http://"+ipaddress+":8282/checkcard?U=" +p.getUsername()+ "&C="+iCartella +"&CT=" +callEnum.name()+ "&LN="+extractions.get(extractions.size()-1));
 
@@ -192,21 +270,35 @@ public class GameController {
 
 	}
 
+    /**
+     * Obtain the numbers that has been extracted
+     *
+     * @return extractions numbers extracted
+     */
 	public ArrayList<Integer> getExtractions() {
 		return extractions;
 	}
 
+    /**
+     * Obtain the number of cards of a player
+     *
+     * @return n the number of cards
+     */
 	public int getCartellaCount() {
 		return n;
 	}
 
-
+    /**
+     * Control and set the variable lastWinningPhrase
+     *
+     * @param jsonwin contains the user and his winning
+     * @param winnings the set of winnings
+     */
 	private void takeWinningUser (String jsonwin,HashMap winnings){
+	    //Initialize the win string
 		String[] win= jsonwin.split(",");
 
-
-
-
+            //Set the lastWinningPhrase
 			for (int i = 0; i < win.length; i++) {
 				String[] userWin = win[i].split(":");
 				if (userWin.length == 2) {
@@ -221,10 +313,20 @@ public class GameController {
 		return winnings;
 	}
 
+    /**
+     * Getter of an username
+     *
+     * @return the username of a player
+     */
 	public String getPlayerName() {
 		return p.getUsername();
 	}
 
+    /**
+     * Getter of lastWinningPhrase
+     *
+     * @return lastWinningPhrase
+     */
 	public String getLastWinningPhrase() {
 		return lastWinningPhrase;
 	}

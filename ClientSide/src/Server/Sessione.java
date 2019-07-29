@@ -20,8 +20,8 @@ public class Sessione {
     //Players of the session
     private ArrayList<Player> players;
 
-    //Minimum number of the player of a session=1
-    private static final int minPlayerCount=1;
+    //Minimum number of the player of a session=2
+    private static final int minPlayerCount=2;
 
     //Winings in the session
     private ArrayList<String> winnings;
@@ -46,11 +46,11 @@ public class Sessione {
 
         //Manage the waiting time between the extractions
         Thread extractor = new Thread(() -> {
-            /*try {
+            try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }*/
+            }
             while (true){
                 System.out.println(t.getNumber());
                 try {

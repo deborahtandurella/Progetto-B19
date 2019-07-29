@@ -121,17 +121,22 @@ public class GameController {
      */
 	private ArrayList<Integer> string2Array(String numbers) {
 
-        //Parsing the string
-		String num = numbers.substring(1,numbers.length()-1);
-		String[] nums = num.split(",");
+		try {
+			//Parsing the string
+			String num = numbers.substring(1, numbers.length() - 1);
+			String[] nums = num.split(",");
 
-        //Create and add the numbers to the Arraylist
-		ArrayList<Integer> numsArr = new ArrayList<>();
+			//Create and add the numbers to the Arraylist
+			ArrayList<Integer> numsArr = new ArrayList<>();
 
-		for (int i = 0; i < nums.length; i++) {
-			numsArr.add(Integer.valueOf(nums[i]));
+			for (int i = 0; i < nums.length; i++) {
+				numsArr.add(Integer.valueOf(nums[i]));
+			}
+			return numsArr;
+		} catch (NumberFormatException e) {
+			return new ArrayList<>();
 		}
-		return numsArr;
+
 	}
 
     /**
@@ -200,7 +205,7 @@ public class GameController {
 				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 				Any anyWins = JsonIterator.deserialize(wins);
 				String winners = anyWins.get("winners").toString();
-				System.out.println(winners);
+				//System.out.println(winners);
 				winners=winners.substring(1,winners.length()-1);
 				takeWinningUser(winners,winnings);
 

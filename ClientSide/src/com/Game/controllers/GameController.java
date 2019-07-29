@@ -63,11 +63,12 @@ public class GameController {
 	 */
 	public GameController(String playerName, int n, String text) {
 
-        //Set the json of the player
+        //Set the connection to the server and json of the player
+		ipaddress = text;
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		lastWinningPhrase = "";
-		ipaddress = text;
+
 
 		//tts = new TextToSpeech();
 		//tts.setVoice("istc-lucia-hsmm");
@@ -86,7 +87,7 @@ public class GameController {
 	}
 
     /**
-     * Traslate the player information from Json to object
+     * Translate the player information from Json to object
      *
      * @param playerJson json of the player
      * @param n numbers of cards
@@ -183,7 +184,6 @@ public class GameController {
 
     /**
      * Start the extraction of the numbers of a game
-     * TODO: commentare singolarmente il codice
      *
      * @param updateFunction
      */
@@ -200,11 +200,13 @@ public class GameController {
 					e.printStackTrace();
 				}
 
+				//Take the numbers from the server
 				String nums = connectHttpTo("http://"+ipaddress+":8282/extractions");
 
 				Any anyNums = JsonIterator.deserialize(nums);
 				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
 
+				//Take the winners from the server
 				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 				Any anyWins = JsonIterator.deserialize(wins);
 				String winners = anyWins.get("winners").toString();
@@ -212,6 +214,7 @@ public class GameController {
 				winners=winners.substring(1,winners.length()-1);
 				takeWinningUser(winners,winnings);
 
+				//Notify the extraction of a number
 				if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
 					//Reproduce audio and update last num
 					lastNum = extractions.get(extractions.size()-1);

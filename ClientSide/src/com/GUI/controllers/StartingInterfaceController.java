@@ -67,6 +67,9 @@ public class StartingInterfaceController implements Initializable {
     @FXML
     ComboBox<String> comboBox;
 
+    @FXML
+    TextField ipText;
+
     private String numeroCartelle;
     private String username;
     private GameController gc;
@@ -78,7 +81,7 @@ public class StartingInterfaceController implements Initializable {
     @FXML
     public void buttonEvent(ActionEvent event) throws Exception {
 
-        gc = new GameController(textField.getText(),Integer.valueOf(comboBox.getValue()));
+        gc = new GameController(textField.getText(),Integer.valueOf(comboBox.getValue()),ipText.getText());
         //ottengo da GameController una nuova cartella per crearne il componente
 
         for (int i = 0; i < gc.getCartellaCount(); i++) {

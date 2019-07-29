@@ -135,6 +135,7 @@ public class Sessione {
 
     private void endGame() {
         extractor.interrupt();
+        extractor.stop();
     }
 
     /**

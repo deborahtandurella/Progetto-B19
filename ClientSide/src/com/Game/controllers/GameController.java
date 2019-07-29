@@ -57,16 +57,17 @@ public class GameController {
 
     /**
      * Constructor of the class GameController
-     *
-     * @param playerName username of a player
+     *  @param playerName username of a player
      * @param n numbers of cards of a player
-     */
-	public GameController(String playerName, int n) {
+	 * @param text
+	 */
+	public GameController(String playerName, int n, String text) {
 
         //Set the json of the player
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		lastWinningPhrase = "";
+		ipaddress = text;
 
 		//tts = new TextToSpeech();
 		//tts.setVoice("istc-lucia-hsmm");

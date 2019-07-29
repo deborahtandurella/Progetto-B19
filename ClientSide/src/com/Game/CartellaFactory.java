@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Generate rows and columns of a table and assign the numbers
+ *It is a Factory class to generate rows and columns of a table and assign the numbers
  */
 public class CartellaFactory {
 

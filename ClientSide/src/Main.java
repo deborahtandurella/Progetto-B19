@@ -24,15 +24,9 @@ public class Main extends Application {
 
     /**
      * Main client method
-     *
-     * @param args
      */
     public static void main(String[] args) {
-       /* Client client =  new Client();
-
-        client.avviaClient(); */
-
-
+        //Start GUI
         launch(args);
     }
 
@@ -44,26 +38,6 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("resources/MenuStage.fxml"));
-
-        //Integer[] num = CartellaFactory.createCartella().getNumeri();
-
-
-
-
-        //CartellaComponent cartella1 = new CartellaComponent();
-        //NumbersBoard numbersBoard = new NumbersBoard();
-        //numbersBoard.initNumbers();
-        //cartella1.setNumeri(num);
-        //Pane root = new Pane();
-        //root.getChildren().add(numbersBoard);
-
-
-
-        //root.getChildren().add(cartella1);
-        //Scene scene = new Scene(root);
-
-        //scene.getStylesheets().add(this.getClass().getResource("resources/Style.CSS").toExternalForm() );
 
         //Load and start the main menu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/StartingInterface.fxml"));

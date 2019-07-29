@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 //successivamente da aggiustare con un input di più cartella
 
 /**
- * The controller of the graphic of the game
+ * JavaFX controller of GameInterface interface
  */
 public class GameInterfaceController implements Initializable {
 
@@ -86,6 +86,9 @@ public class GameInterfaceController implements Initializable {
         this.index = 0;
     }
 
+    /**
+     * Called method by click event button Ambo
+     */
     public void amboEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.AMBO, index)){
             textField.setText("Complimenti hai fatto ambo!!");
@@ -98,6 +101,9 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Called method by click event button Terna
+     */
     public void ternaEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.TERNA,index)){
             textField.setText("Complimenti hai fatto terna!!");
@@ -110,6 +116,9 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Called method by click event button Quaterna
+     */
     public void quaternaEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.QUATERNA, index)){
             textField.setText("Complimenti hai fatto quaterna!!");
@@ -122,6 +131,9 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Called method by click event button Cinquina
+     */
     public void cinquinaEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.CINQUINA, index)){
             textField.setText("Complimenti hai fatto cinquina!!");
@@ -135,6 +147,9 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Called method by click event button Tombola
+     */
     public void tombolaEvent(ActionEvent event){
         if (logicController.buttonControl(btnValue.TOMBOLA, index)){
             textField.setText("Complimenti hai fatto tombola!!");
@@ -147,7 +162,9 @@ public class GameInterfaceController implements Initializable {
         }
     }
 
-    //da implementare successivamente
+    /**
+     * Called method by click event button to go to next card
+     */
     public void nextButton(ActionEvent event){
         index++;
 
@@ -160,7 +177,9 @@ public class GameInterfaceController implements Initializable {
         System.out.println(index);
     }
 
-    //da implementare successivamente
+    /**
+     * Called method by click event button to go to previous card
+     */
     public void previousButton(ActionEvent event){
         index--;
         if(index <0){
@@ -184,7 +203,9 @@ public class GameInterfaceController implements Initializable {
     }
 
 
-
+    /**
+     * First method called by JavaFX when starting GameInterface interface
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -198,6 +219,9 @@ public class GameInterfaceController implements Initializable {
 
     }
 
+    /**
+     * Called to update the interface every extractions
+     */
     private void updateExtractions() {
         ArrayList<Integer> extractions = logicController.getExtractions();
 

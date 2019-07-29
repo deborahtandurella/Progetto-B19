@@ -25,6 +25,7 @@ public class GetExtractionsServlet extends HttpServlet {
         //Numbers extracted
         ArrayList<Integer> extr = ApplicationServer.s.getExtractions();
 
+        //Serialize from Array to Json
         String extrJson = JsonStream.serialize(extr);
 
         extrJson = "{\n\"numbers\":"+extrJson+"}";

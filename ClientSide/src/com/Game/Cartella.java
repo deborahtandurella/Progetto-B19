@@ -5,7 +5,7 @@ import com.jsoniter.annotation.JsonIgnore;
 import java.util.ArrayList;
 
 /**
- * Rapresents a generic card
+ * Represents a generic card
  */
 public class Cartella {
 
@@ -44,7 +44,8 @@ public class Cartella {
 	 * Test if a card has a winnin row
 	 *
 	 * @param r number of the row
-	 * @return
+	 * @return true, if in the row that we are controlling there are no winnings
+	 * 		   false, in other cases
 	 */
 	@JsonIgnore
 	public boolean isValidWinningRow(int r){
@@ -52,7 +53,7 @@ public class Cartella {
 	}
 
 	/**
-	 * Add a row to the winnings row
+	 * Add a row to the winnings rows
 	 *
 	 * @param r number of the row
 	 */

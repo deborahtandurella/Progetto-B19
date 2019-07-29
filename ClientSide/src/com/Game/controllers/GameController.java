@@ -57,9 +57,10 @@ public class GameController {
 
     /**
      * Constructor of the class GameController
-     *  @param playerName username of a player
+	 *
+     * @param playerName username of a player
      * @param n numbers of cards of a player
-	 * @param text
+	 * @param text ip address of the server
 	 */
 	public GameController(String playerName, int n, String text) {
 
@@ -91,7 +92,7 @@ public class GameController {
      *
      * @param playerJson json of the player
      * @param n numbers of cards
-     * @return p the istance of Player
+     * @return p the instance of Player
      */
 	private Player deserializePlayer(String playerJson, int n) {
 		//Parsing json
@@ -144,7 +145,7 @@ public class GameController {
 	}
 
     /**
-     * Set the connection to the Http server
+     * Send request to the Http server
      *
      * @param url address of the server
      * @return the response, if the connection is successful
@@ -159,10 +160,9 @@ public class GameController {
 			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
 			connection.setRequestMethod("GET");
 
+			//TODO:controllo se il player è stato aggiunto correttamente
 			int rcode = connection.getResponseCode();
 
-			//System.out.println("\nSending 'GET' request to URL : " + url);
-			//System.out.println("Response Code : " + rcode);
 
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(connection.getInputStream()));
@@ -210,7 +210,6 @@ public class GameController {
 				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 				Any anyWins = JsonIterator.deserialize(wins);
 				String winners = anyWins.get("winners").toString();
-				//System.out.println(winners);
 				winners=winners.substring(1,winners.length()-1);
 				takeWinningUser(winners,winnings);
 
@@ -245,11 +244,6 @@ public class GameController {
 		estrattore.stop();
 	}
 
-
-	public Cartella getCartella(int index) {
-		return p.getCartella(index);
-	}
-
     /**
      * Convert a card in an Array of numbers
      *
@@ -265,7 +259,6 @@ public class GameController {
      * @param iCartella index of the card
      * @return true, if the response is correct
      *         false, if the response is null
-     * @throws NullPointerException
      */
 	public boolean buttonControl(CallEnum callEnum, int iCartella) throws NullPointerException {
 
@@ -316,7 +309,7 @@ public class GameController {
 		for (int i = 0; i < win.length; i++) {
 			String[] userWin = win[i].split(":");
 			if (userWin.length == 2) {
-				winnings.put(userWin[1], userWin[0]); //TODO modificare in modo da ottenere tramite la chiave il nome utente
+				winnings.put(userWin[1], userWin[0]);
 				if(userWin[1].toUpperCase().equals("TOMBOLA")) {
 					lastWinningPhrase = userWin[0] + " ha vinto il gioco !!";
 				}else {

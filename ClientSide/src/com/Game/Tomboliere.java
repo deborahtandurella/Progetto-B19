@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Class that manages the cards and check the cards
+ * Manages the cards and check the cards
  */
 public class Tomboliere {
 
@@ -51,16 +51,6 @@ public class Tomboliere {
 	 */
 	public synchronized ArrayList<Integer> getExtractions(){
 		return numeriUsciti;
-	}
-
-	/**
-	 * Generator of a new card
-	 *
-	 * @return a new card
-	 */
-
-	public Cartella getCartella() {
-		return CartellaFactory.createCartella();
 	}
 
 	/**
@@ -144,20 +134,12 @@ public class Tomboliere {
 		return -1;
 	}
 
-
-	private ArrayList<Integer> getSubExtractions(int LN) {
-		ArrayList<Integer> red=new ArrayList<>();
-
-		for(int i=0;i<numeriUsciti.size();i++){
-			if(numeriUsciti.get(i)==LN){
-				return red;
-			}
-			red.add(numeriUsciti.get(i));
-		}
-		return red;
-	}
-
-	//Membro interno che ritorna il numero di match necessari per il tipo di chaimata
+	/**
+	 * Used to translate from CallEnum to Integer
+	 *
+	 * @param callType type of call made by a player
+	 * @return the integer that represents the callType
+	 */
 	private int getNumberForCallType(CallEnum callType) {
 		switch (callType){
 			case AMBO:

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Create the card
+ * GUI component that displays player card
  */
 public class CartellaComponent extends GridPane {
 
@@ -47,7 +47,7 @@ public class CartellaComponent extends GridPane {
     }
 
     /**
-     * Set the number of the cell of a table
+     * Set the number of the cell of a table and add listeners to buttons
      *
      * @param numeri numbers assigned to a card
      */

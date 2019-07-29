@@ -77,7 +77,9 @@ public class StartingInterfaceController implements Initializable {
 
     ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6");
 
-    //Funzione che permette di passare all'interfaccia successiva
+    /**
+     *Called by JavaFX when the player clicks the button "PLAY"
+     */
     @FXML
     public void buttonEvent(ActionEvent event) throws Exception {
 
@@ -125,21 +127,18 @@ public class StartingInterfaceController implements Initializable {
         currStage.show();
         currStage.setMaximized(true);
 
-/*
-        Stage currStage = (Stage) textField.getScene().getWindow();
-        currStage.setScene(new Scene(root, 800, 560));
-        currStage.setOnCloseRequest(e -> handleClose());
-        currStage.show();
-        currStage.setMaximized(true);
-*/
-
     }
 
+    /**
+     * Used to stop the extraction when the interface is closed
+     */
     private void handleClose() {
         gc.stopExtractions();
     }
 
-    //setto il combobox, oggetto gamecontroller
+    /**
+     * First method called by JavaFX when starting StartingInterface interface
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboBox.setItems(list);

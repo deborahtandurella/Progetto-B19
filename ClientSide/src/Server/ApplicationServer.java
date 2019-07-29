@@ -12,7 +12,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import javax.servlet.Servlet;
 
 /**
- * Setup the connection and the element of the game for the server
+ * Setup the connection and the element of the game for the server side
  */
 public class ApplicationServer {
 
@@ -37,15 +37,13 @@ public class ApplicationServer {
 
     /**
      *Setup and create the server
-     *
-     * @throws Exception
      */
     public void start() throws Exception {
 
             //Create the server
             server = new Server(port);
 
-            //Setup the handler
+            //Setup the handlers
             ServletContextHandler handler = new ServletContextHandler();
             handler.addServlet(new ServletHolder(new AddPlayerServlet()), "/addplayer");
             handler.addServlet(new ServletHolder(new GetExtractionsServlet()), "/extractions");
@@ -59,8 +57,6 @@ public class ApplicationServer {
 
     /**
      * Stop the server
-     *
-     * @throws Exception
      */
     public void stop() throws Exception {
             server.stop();

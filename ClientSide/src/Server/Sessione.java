@@ -23,8 +23,10 @@ public class Sessione {
     //Minimum number of the player of a session=2
     private static final int minPlayerCount=2;
 
-    //Winings in the session
+    //Winnings in the session
     private ArrayList<String> winnings;
+
+    //Server side extractor Thread
     private Thread extractor;
 
 
@@ -34,7 +36,6 @@ public class Sessione {
     public Sessione() {
         t = new Tomboliere();
         players = new ArrayList<>();
-
         winnings = new ArrayList<>();
 
     }
@@ -45,9 +46,9 @@ public class Sessione {
      */
     public void startExtractor(){
 
-        //Manage the waiting time between the extractions
         extractor = new Thread(() -> {
             try {
+                //Manage the waiting time to start the extraction
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -55,6 +56,7 @@ public class Sessione {
             while (true){
                 System.out.println(t.getNumber());
                 try {
+                    //Manage the waiting time from an extraction to another extraction
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -71,7 +73,7 @@ public class Sessione {
      *
      * @param username name of the player
      * @param n number of cards
-     * @return the new player of the session (temporary because it will be deleted at the end of the game)
+     * @return the new player of the session
      */
     public Player addPLayer(String username, int n){
 
@@ -109,12 +111,10 @@ public class Sessione {
      * @param username the name of the player
      * @param iCartella index of the card
      * @param call type of the call
-     * @param LN last number released
      *
      * @return true if the call is right; false if the call is wrong
-     * @throws Exception
      */
-    public boolean checkCall(String username, int iCartella, CallEnum call, int LN) throws Exception {
+    public boolean checkCall(String username, int iCartella, CallEnum call) throws Exception {
 
         //Use the checkCall method of the Tomboliere
         int r = t.checkCall(call,players.get(findPlayer(username)).getCartella(iCartella));
@@ -133,6 +133,9 @@ public class Sessione {
         return false;
     }
 
+    /**
+     * Stops extraction Thread
+     */
     private void endGame() {
         extractor.interrupt();
         extractor.stop();

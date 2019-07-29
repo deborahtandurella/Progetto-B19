@@ -7,8 +7,6 @@ public class MainServer {
 
     /**
      *Main method of the server
-     *
-     * @param args
      */
     public static void main(String[] args) {
         try {

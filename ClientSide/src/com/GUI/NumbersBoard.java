@@ -9,12 +9,15 @@ import javafx.scene.layout.RowConstraints;
 import java.util.ArrayList;
 
 /**
- * Show a table of extracted numbers
+ * GUI component to shows a table of extracted numbers
  */
 public class NumbersBoard extends GridPane {
 
     private ArrayList<Label> labels;
 
+    /**
+     * Constructor of NumberBoard
+     */
     public NumbersBoard() {
         super();
 
@@ -49,22 +52,23 @@ public class NumbersBoard extends GridPane {
 
     }
 
-
+    /**
+     * Set the number of the cell of a table
+     */
     public void initNumbers(){
 
         for (int rows = 0; rows < 9; rows++) {
             for (int cols = 0; cols < 10; cols++) {
                 int indice = cols + rows*10;
-                //labels.get(indice).setText(String.valueOf(indice));
                 this.add(labels.get(indice),cols,rows);
-                //System.out.println(indice);
             }
         }
 
-
-
     }
 
+    /**
+     * Called when the table has to be updated
+     */
     public void updateGrid(ArrayList<Integer> numbers) {
         for (int i = 0; i < numbers.size(); i++) {
             int n = numbers.get(i)-1;

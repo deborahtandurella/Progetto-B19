@@ -37,7 +37,7 @@ public class CheckCardServlet extends HttpServlet {
 
                 CallEnum call = CallEnum.valueOf(params[2].substring(3).toUpperCase());
 
-                if(ApplicationServer.s.checkCall(username,iCartella,call,LN)) {
+                if(ApplicationServer.s.checkCall(username,iCartella,call)) {
                     resp.setStatus(HttpServletResponse.SC_OK);
                     resp.getWriter().write("{\"check\":\"true\"}");
                 }else{

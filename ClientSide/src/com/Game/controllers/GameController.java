@@ -66,6 +66,8 @@ public class GameController {
         //Set the json of the player
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
+		lastWinningPhrase = "";
+
 		//tts = new TextToSpeech();
 		//tts.setVoice("istc-lucia-hsmm");
 

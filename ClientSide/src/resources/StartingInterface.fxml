@@ -50,6 +50,11 @@
                </children>
             </HBox>
          </children>
+         <TextField fx:id="ipText" layoutX="326.0" layoutY="211.0" prefHeight="42.0" prefWidth="167.0" promptText="IP Address" AnchorPane.leftAnchor="462.0">
+            <font>
+               <Font name="Helvetica" size="13.0" />
+            </font>
+         </TextField>
       </AnchorPane>
    </children>
 </StackPane>

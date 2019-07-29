@@ -25,6 +25,7 @@ public class Sessione {
 
     //Winings in the session
     private ArrayList<String> winnings;
+    private Thread extractor;
 
 
     /**
@@ -45,7 +46,7 @@ public class Sessione {
     public void startExtractor(){
 
         //Manage the waiting time between the extractions
-        Thread extractor = new Thread(() -> {
+        extractor = new Thread(() -> {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -126,9 +127,14 @@ public class Sessione {
         }else if(r==15){
             players.get(findPlayer(username)).getCartella(iCartella).setInvalid();
             addWinning(players.get(findPlayer(username)),call);
+            endGame();
             return true;
        }
         return false;
+    }
+
+    private void endGame() {
+        extractor.interrupt();
     }
 
     /**

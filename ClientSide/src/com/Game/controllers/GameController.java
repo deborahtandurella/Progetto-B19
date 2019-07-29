@@ -300,17 +300,29 @@ public class GameController {
      * @param winnings the set of winnings
      */
 	private void takeWinningUser (String jsonwin,HashMap winnings){
+
+		String tmpLast =  lastWinningPhrase;
+
 	    //Initialize the win string
 		String[] win= jsonwin.split(",");
 
-            //Set the lastWinningPhrase
-			for (int i = 0; i < win.length; i++) {
-				String[] userWin = win[i].split(":");
-				if (userWin.length == 2) {
-					winnings.put(userWin[1], userWin[0]); //TODO modificare in modo da ottenere tramite la chiave il nome utente
+		//Set the lastWinningPhrase
+		for (int i = 0; i < win.length; i++) {
+			String[] userWin = win[i].split(":");
+			if (userWin.length == 2) {
+				winnings.put(userWin[1], userWin[0]); //TODO modificare in modo da ottenere tramite la chiave il nome utente
+				if(userWin[1].toUpperCase().equals("TOMBOLA")) {
+					lastWinningPhrase = userWin[0] + " ha vinto il gioco !!";
+				}else {
 					lastWinningPhrase = userWin[0] + " ha fatto " + userWin[1];
 				}
 			}
+		}
+
+		if(!tmpLast.equals(lastWinningPhrase)) {
+			//Se si aggiunge la voce, deve parlare qui
+			//tts.speak(lastWinningPhrase,1.0f,false,false);
+		}
 
 	}
 

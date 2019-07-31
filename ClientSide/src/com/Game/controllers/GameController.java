@@ -312,6 +312,10 @@ public class GameController {
 				winnings.put(userWin[1], userWin[0]);
 				if(userWin[1].toUpperCase().equals("TOMBOLA")) {
 					lastWinningPhrase = userWin[0] + " ha vinto il gioco !!";
+					stopExtractions();
+
+
+
 				}else {
 					lastWinningPhrase = userWin[0] + " ha fatto " + userWin[1];
 				}

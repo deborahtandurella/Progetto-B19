@@ -139,6 +139,7 @@ public class Sessione {
     private void endGame() {
         extractor.interrupt();
         extractor.stop();
+        resetSession();
     }
 
     /**
@@ -175,4 +176,13 @@ public class Sessione {
     public ArrayList<String> getWinnings() {
         return winnings;
     }
+
+
+    private void resetSession() {
+
+        t = new Tomboliere();
+        players = new ArrayList<>();
+        winnings = new ArrayList<>();
+    }
+
 }

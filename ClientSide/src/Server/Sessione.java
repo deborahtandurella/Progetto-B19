@@ -57,7 +57,7 @@ public class Sessione {
                 System.out.println(t.getNumber());
                 try {
                     //Manage the waiting time from an extraction to another extraction
-                    Thread.sleep(3000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

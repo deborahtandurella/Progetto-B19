@@ -21,7 +21,7 @@ public class Sessione {
     private ArrayList<Player> players;
 
     //Minimum number of the player of a session=2
-    private static final int minPlayerCount=2;
+    private static final int minPlayerCount=1;
 
     //Winnings in the session
     private ArrayList<String> winnings;

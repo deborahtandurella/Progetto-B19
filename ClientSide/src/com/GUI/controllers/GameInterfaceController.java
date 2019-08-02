@@ -223,15 +223,20 @@ public class GameInterfaceController implements Initializable {
      * Called to update the interface every extractions
      */
     private void updateExtractions() {
-        ArrayList<Integer> extractions = logicController.getExtractions();
+        try {
+            ArrayList<Integer> extractions = logicController.getExtractions();
 
 
-        NumbersBoard numbersBoard = (NumbersBoard) anchor2.getChildren().get(0);
+            if (extractions.size() > 0) {
+                NumbersBoard numbersBoard = (NumbersBoard) anchor2.getChildren().get(0);
 
-        numbersBoard.updateGrid(extractions);
+                numbersBoard.updateGrid(extractions);
 
-        textField.setText(logicController.getLastWinningPhrase());
+                textField.setText(logicController.getLastWinningPhrase());
+            }
+        }catch (Exception e){
 
+        }
     }
 
 }

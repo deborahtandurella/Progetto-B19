@@ -186,48 +186,52 @@ public class GameController {
 
         //Set and initialize the extractor
 		estrattore = new Thread(() -> {
-
-			while (true){
-
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-				//Take the numbers from the server
-				String nums = connectHttpTo("http://"+ipaddress+":8282/extractions");
-
-				Any anyNums = JsonIterator.deserialize(nums);
-				extractions = string2Array(String.valueOf(anyNums.get("numbers")));
-
-				//Take the winners from the server
-				String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
-				Any anyWins = JsonIterator.deserialize(wins);
-				String winners = anyWins.get("winners").toString();
-				winners=winners.substring(1,winners.length()-1);
-				takeWinningUser(winners,winnings);
-
-				//Notify the extraction of a number
-				if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
-					//Reproduce audio and update last num
-					lastNum = extractions.get(extractions.size()-1);
-
-					String bip = "src/resources/BipSound.mp3";
-					Media hit = new Media(new File(bip).toURI().toString());
-					MediaPlayer mediaPlayer = new MediaPlayer(hit);
-					mediaPlayer.play();
-
-
-					tts.speak(String.valueOf(lastNum),1.0f,false,false);
-				}
-
-
-				updateFunction.run();
-			}
+			extract(updateFunction);
 		});
 
 		estrattore.start();
+	}
+
+
+	private synchronized void extract(Runnable updateFunction) {
+		while (true){
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			//Take the numbers from the server
+			String nums = connectHttpTo("http://"+ipaddress+":8282/extractions");
+
+			Any anyNums = JsonIterator.deserialize(nums);
+			extractions = string2Array(String.valueOf(anyNums.get("numbers")));
+
+			//Take the winners from the server
+			String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
+			Any anyWins = JsonIterator.deserialize(wins);
+			String winners = anyWins.get("winners").toString();
+			winners=winners.substring(1,winners.length()-1);
+			takeWinningUser(winners,winnings);
+
+			//Notify the extraction of a number
+			if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
+				//Reproduce audio and update last num
+				lastNum = extractions.get(extractions.size()-1);
+
+				String bip = "src/resources/BipSound.mp3";
+				Media hit = new Media(new File(bip).toURI().toString());
+				MediaPlayer mediaPlayer = new MediaPlayer(hit);
+				mediaPlayer.play();
+
+
+				tts.speak(String.valueOf(lastNum),1.0f,false,false);
+			}
+
+
+			updateFunction.run();
+		}
 	}
 
 
@@ -274,7 +278,7 @@ public class GameController {
      *
      * @return extractions numbers extracted
      */
-	public ArrayList<Integer> getExtractions() {
+	public synchronized ArrayList<Integer> getExtractions() {
 		return extractions;
 	}
 

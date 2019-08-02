@@ -2,23 +2,18 @@ package com.Game.controllers;
 
 import com.Game.CallEnum;
 import com.Game.Cartella;
-import com.Game.Tomboliere;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
-import com.sun.org.apache.regexp.internal.RE;
+import com.util.TextToSpeech;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-// import com.util.TextToSpeech;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -51,7 +46,7 @@ public class GameController {
 	private String lastWinningPhrase;
 
 	//Texttospeech
-	//private TextToSpeech tts;
+	private TextToSpeech tts;
 
 
 
@@ -71,8 +66,8 @@ public class GameController {
 		lastWinningPhrase = "";
 
 
-		//tts = new TextToSpeech();
-		//tts.setVoice("istc-lucia-hsmm");
+		tts = new TextToSpeech();
+		tts.setVoice("istc-lucia-hsmm");
 
 
 		extractions = new ArrayList<>();
@@ -82,7 +77,7 @@ public class GameController {
 
 		this.n = n;
 
-		//tts.speak("Ciao " + p.getUsername(),1.0f,false,false);
+		tts.speak("Ciao " + p.getUsername(),1.0f,false,false);
 
 
 	}
@@ -224,7 +219,7 @@ public class GameController {
 					mediaPlayer.play();
 
 
-					//tts.speak(String.valueOf(lastNum),1.0f,false,false);
+					tts.speak(String.valueOf(lastNum),1.0f,false,false);
 				}
 
 
@@ -324,7 +319,7 @@ public class GameController {
 
 		if(!tmpLast.equals(lastWinningPhrase)) {
 			//Se si aggiunge la voce, deve parlare qui
-			//tts.speak(lastWinningPhrase,1.0f,false,false);
+			tts.speak(lastWinningPhrase,1.0f,false,false);
 		}
 
 	}

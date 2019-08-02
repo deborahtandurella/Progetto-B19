@@ -29,6 +29,9 @@ public class Sessione {
     //Server side extractor Thread
     private Thread extractor;
 
+    private int secondsBeforeExtraction = 2;
+    private int secondsBetweenExtractions = 4;
+
 
     /**
      * Constructor of the class Sessione
@@ -49,7 +52,7 @@ public class Sessione {
         extractor = new Thread(() -> {
             try {
                 //Manage the waiting time to start the extraction
-                Thread.sleep(2000);
+                Thread.sleep(secondsBeforeExtraction*1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -57,7 +60,7 @@ public class Sessione {
                 System.out.println(t.getNumber());
                 try {
                     //Manage the waiting time from an extraction to another extraction
-                    Thread.sleep(4000);
+                    Thread.sleep(secondsBetweenExtractions*1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

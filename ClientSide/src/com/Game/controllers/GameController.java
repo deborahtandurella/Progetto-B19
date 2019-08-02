@@ -48,6 +48,8 @@ public class GameController {
 	//Texttospeech
 	private TextToSpeech tts;
 
+	private boolean goodUsername;
+
 
 
     /**
@@ -62,6 +64,10 @@ public class GameController {
         //Set the connection to the server and json of the player
 		ipaddress = text;
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
+
+		if(!goodUsername) return;
+
+
 
 		lastWinningPhrase = "";
 
@@ -156,8 +162,12 @@ public class GameController {
 			connection.setRequestMethod("GET");
 
 			//TODO:controllo se il player è stato aggiunto correttamente
-			int rcode = connection.getResponseCode();
+			int usernameCode = connection.getResponseCode();
 
+			goodUsername = usernameCode != 400;
+			if(!goodUsername) {
+				return "";
+			}
 
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(connection.getInputStream()));
@@ -348,5 +358,9 @@ public class GameController {
      */
 	public String getLastWinningPhrase() {
 		return lastWinningPhrase;
+	}
+
+	public boolean isValidUsername() {
+		return goodUsername;
 	}
 }

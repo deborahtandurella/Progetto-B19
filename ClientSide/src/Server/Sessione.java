@@ -21,7 +21,7 @@ public class Sessione {
     private ArrayList<Player> players;
 
     //Minimum number of the player of a session=2
-    private static final int minPlayerCount=1;
+    private static final int minPlayerCount=3;
 
     //Winnings in the session
     private ArrayList<String> winnings;
@@ -188,4 +188,13 @@ public class Sessione {
         winnings = new ArrayList<>();
     }
 
+    public boolean validUsername(String username) {
+        for (Player p : players) {
+            if (p.getUsername().equals(username)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

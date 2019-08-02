@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -84,6 +85,18 @@ public class StartingInterfaceController implements Initializable {
     public void buttonEvent(ActionEvent event) throws Exception {
 
         gc = new GameController(textField.getText(),Integer.valueOf(comboBox.getValue()),ipText.getText());
+        if(!gc.isValidUsername()) {
+
+            //Show username error
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Bad Username");
+            alert.setHeaderText("Sorry but this username is already taken");
+            alert.setContentText("Please choose another one!");
+
+            alert.showAndWait();
+
+            return;
+        }
         //ottengo da GameController una nuova cartella per crearne il componente
 
         for (int i = 0; i < gc.getCartellaCount(); i++) {

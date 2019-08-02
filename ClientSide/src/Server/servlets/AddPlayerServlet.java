@@ -34,19 +34,23 @@ public class AddPlayerServlet extends HttpServlet {
 
             //Obtain the parameters
             String username = params[0].substring(2);
-            int nCartelle = Integer.parseInt(params[1].substring(2));
+            if(ApplicationServer.s.validUsername(username)) {
+                int nCartelle = Integer.parseInt(params[1].substring(2));
 
-            //Create the player
-            Player p = ApplicationServer.s.addPLayer(username,nCartelle);
+                //Create the player
+                Player p = ApplicationServer.s.addPLayer(username, nCartelle);
 
-            //Traslation in json
-            String s = JsonStream.serialize(p);
-            resp.getWriter().write(s);
+                //Translation in json
+                String s = JsonStream.serialize(p);
+                resp.getWriter().write(s);
+            }else{
+
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("{\"valid\":\"false\"}");
+            }
 
 
-        }else{
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            resp.getWriter().write("{\"valid\":\"false\"}");
+
         }
 
 

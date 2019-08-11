@@ -1,5 +1,6 @@
 package com.util;
 
+
 import marytts.LocalMaryInterface;
 import marytts.MaryInterface;
 import marytts.exceptions.MaryConfigurationException;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 
+
 /**
  * @author GOXR3PLUS
  *
@@ -34,12 +36,14 @@ public class TextToSpeech {
 
 
     public TextToSpeech() {
+
         try {
             marytts = new LocalMaryInterface();
 
         } catch (MaryConfigurationException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     //----------------------GENERAL METHODS---------------------------------------------------//
@@ -65,6 +69,7 @@ public class TextToSpeech {
         // Stop the previous player
         stopSpeaking();
 
+
         try (AudioInputStream audio = marytts.generateAudio(text)) {
 
             // Player is a thread(threads can only run one time) so it can be
@@ -87,6 +92,7 @@ public class TextToSpeech {
         }
     }
 
+
     /**
      * Stop the MaryTTS from Speaking
      */
@@ -106,11 +112,11 @@ public class TextToSpeech {
      * @return The available voices for MaryTTS
      */
 
-    /*
+
     public Collection<Voice> getAvailableVoices() {
         return Voice.getAvailableVoices();
     }
-    */
+
 
     /**
      * @return the marytts
@@ -148,3 +154,4 @@ public class TextToSpeech {
     }
 
 }
+

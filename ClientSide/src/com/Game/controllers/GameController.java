@@ -59,6 +59,8 @@ public class GameController {
      * @param n numbers of cards of a player
 	 * @param text ip address of the server
 	 */
+
+
 	public GameController(String playerName, int n, String text) {
 
         //Set the connection to the server and json of the player
@@ -192,6 +194,7 @@ public class GameController {
      *
      * @param updateFunction
      */
+
 	public void startExtraction(Runnable updateFunction) {
 
         //Set and initialize the extractor
@@ -307,6 +310,8 @@ public class GameController {
      * @param jsonwin contains the user and his winning
      * @param winnings the set of winnings
      */
+
+
 	private void takeWinningUser (String jsonwin,HashMap winnings){
 
 		String tmpLast =  lastWinningPhrase;

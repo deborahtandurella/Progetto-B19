@@ -33,7 +33,7 @@ public class AddPlayerServlet extends HttpServlet {
         if(params[0].startsWith("U=") && params[1].startsWith("N=")){
 
             //Obtain the parameters
-            String username = params[0].substring(2);
+            String username = params[0].substring(2).toLowerCase();
             if(ApplicationServer.s.validUsername(username)) {
                 int nCartelle = Integer.parseInt(params[1].substring(2));
 

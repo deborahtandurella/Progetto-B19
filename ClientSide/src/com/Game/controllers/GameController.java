@@ -49,10 +49,11 @@ public class GameController {
 	private TextToSpeech tts;
 
 	private boolean goodUsername;
+	private boolean gameover;
 
 
 
-    /**
+	/**
      * Constructor of the class GameController
 	 *
      * @param playerName username of a player
@@ -68,7 +69,7 @@ public class GameController {
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
 		if(!goodUsername) return;
-
+		gameover = false;
 
 
 		lastWinningPhrase = "";
@@ -197,6 +198,8 @@ public class GameController {
 
 	public void startExtraction(Runnable updateFunction) {
 
+
+
         //Set and initialize the extractor
 		estrattore = new Thread(() -> {
 			extract(updateFunction);
@@ -225,8 +228,10 @@ public class GameController {
 			String wins = connectHttpTo("http://"+ipaddress+":8282/winnings");
 			Any anyWins = JsonIterator.deserialize(wins);
 			String winners = anyWins.get("winners").toString();
-			winners=winners.substring(1,winners.length()-1);
-			takeWinningUser(winners,winnings);
+			if(winners.length()>4) {
+				winners = winners.substring(2, winners.length() - 2);
+				takeWinningUser(winners, winnings);
+			}
 
 			//Notify the extraction of a number
 			if(!extractions.isEmpty() && extractions.get(extractions.size()-1) != lastNum) {
@@ -252,6 +257,7 @@ public class GameController {
      *Stop the extraction of the numbers
      */
 	public void stopExtractions(){
+
 		estrattore.interrupt();
 		estrattore.stop();
 	}
@@ -316,16 +322,21 @@ public class GameController {
 
 		String tmpLast =  lastWinningPhrase;
 
+
 	    //Initialize the win string
 		String[] win= jsonwin.split(",");
+
 
 		//Set the lastWinningPhrase
 		for (int i = 0; i < win.length; i++) {
 			String[] userWin = win[i].split(":");
+
 			if (userWin.length == 2) {
 				winnings.put(userWin[1], userWin[0]);
+
 				if(userWin[1].toUpperCase().equals("TOMBOLA")) {
 					lastWinningPhrase = userWin[0] + " ha vinto il gioco !!";
+					gameover = true;
 					stopExtractions();
 
 
@@ -367,5 +378,9 @@ public class GameController {
 
 	public boolean isValidUsername() {
 		return goodUsername;
+	}
+
+	public boolean isGameOver() {
+		return gameover;
 	}
 }

@@ -13,12 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -216,7 +215,6 @@ public class GameInterfaceController implements Initializable {
         logicController.startExtraction(this::updateExtractions);
         textField.setDisable(true);
 
-
     }
 
     /**
@@ -225,17 +223,18 @@ public class GameInterfaceController implements Initializable {
     private void updateExtractions() {
         try {
             ArrayList<Integer> extractions = logicController.getExtractions();
-
+            textField.requestFocus();
 
             if (extractions.size() > 0) {
+
+                textField.setText(logicController.getLastWinningPhrase());
+
                 NumbersBoard numbersBoard = (NumbersBoard) anchor2.getChildren().get(0);
 
                 numbersBoard.updateGrid(extractions);
-
-                textField.setText(logicController.getLastWinningPhrase());
             }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 

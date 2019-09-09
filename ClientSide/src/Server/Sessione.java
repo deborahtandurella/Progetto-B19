@@ -29,7 +29,10 @@ public class Sessione {
     //Server side extractor Thread
     private Thread extractor;
 
+    //Time(in seconds) before the beginning of the extraction
     private int secondsBeforeExtraction = 2;
+
+    //Time(in seconds) between the extractions of numbers
     private int secondsBetweenExtractions = 4;
 
 
@@ -180,7 +183,9 @@ public class Sessione {
         return winnings;
     }
 
-
+    /**
+     * Reset the session initializing all the options
+     */
     private void resetSession() {
 
         t = new Tomboliere();
@@ -188,6 +193,13 @@ public class Sessione {
         winnings = new ArrayList<>();
     }
 
+    /**
+     * Check if the username is not equal to others usernames in the session
+     *
+     * @param username name of a player in the session
+     * @return true, if the username is valid;
+     *         false, if the username is not valid
+     */
     public boolean validUsername(String username) {
         for (Player p : players) {
             if (p.getUsername().equals(username)) {

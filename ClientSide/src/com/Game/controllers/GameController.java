@@ -48,7 +48,10 @@ public class GameController {
 	//Texttospeech
 	private TextToSpeech tts;
 
+	//Report if the username is correct or not
 	private boolean goodUsername;
+
+	//Report Gameover
 	private boolean gameover;
 
 
@@ -60,21 +63,20 @@ public class GameController {
      * @param n numbers of cards of a player
 	 * @param text ip address of the server
 	 */
-
-
 	public GameController(String playerName, int n, String text) {
 
         //Set the connection to the server and json of the player
 		ipaddress = text;
 		String playerJson = connectHttpTo("http://"+ipaddress+":8282/addplayer?U=" + playerName + "&N=" + n);
 
+		//Check the username
 		if(!goodUsername) return;
 		gameover = false;
 
 
 		lastWinningPhrase = "";
 
-
+		//Set the voice of the speaker
 		tts = new TextToSpeech();
 		tts.setVoice("istc-lucia-hsmm");
 
@@ -86,6 +88,7 @@ public class GameController {
 
 		this.n = n;
 
+		//Announce the player
 		tts.speak("Ciao " + p.getUsername(),1.0f,false,false);
 
 
@@ -126,6 +129,7 @@ public class GameController {
      * Translate the string of numbers to an Arraylist of numbers
      *
      * @param numbers String of numbers
+	 * @exception NumberFormatException  if the translation from String to number goes wrong
      * @return Arraylist of numbers
      */
 	private ArrayList<Integer> string2Array(String numbers) {
@@ -167,6 +171,7 @@ public class GameController {
 			//TODO:controllo se il player è stato aggiunto correttamente
 			int usernameCode = connection.getResponseCode();
 
+			//Check if the username is good
 			goodUsername = usernameCode != 400;
 			if(!goodUsername) {
 				return "";
@@ -197,8 +202,6 @@ public class GameController {
      */
 
 	public void startExtraction(Runnable updateFunction) {
-
-
 
         //Set and initialize the extractor
 		estrattore = new Thread(() -> {
@@ -316,8 +319,6 @@ public class GameController {
      * @param jsonwin contains the user and his winning
      * @param winnings the set of winnings
      */
-
-
 	private void takeWinningUser (String jsonwin,HashMap winnings){
 
 		String tmpLast =  lastWinningPhrase;

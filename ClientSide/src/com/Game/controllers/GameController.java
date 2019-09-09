@@ -168,7 +168,7 @@ public class GameController {
 			HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
 			connection.setRequestMethod("GET");
 
-			//TODO:controllo se il player è stato aggiunto correttamente
+			//Get the connection code for the player
 			int usernameCode = connection.getResponseCode();
 
 			//Check if the username is good

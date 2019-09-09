@@ -14,9 +14,6 @@ import java.util.logging.Logger;
 
 /**
  * A single Thread Audio Player Once used it has to be initialised again
- *
- * @author GOXR3PLUS
- *
  */
 
 public class AudioPlayer extends Thread {
@@ -37,9 +34,6 @@ public class AudioPlayer extends Thread {
 
     /**
      * The status of the player
-     *
-     * @author GOXR3PLUS
-     *
      */
 
 

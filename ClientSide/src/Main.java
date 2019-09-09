@@ -57,6 +57,7 @@ public class Main extends Application {
             }
         });
 
+        //Set the primaryStage
         primaryStage.setTitle("Tombola Game!");
         primaryStage.setScene(scene);
         primaryStage.show();

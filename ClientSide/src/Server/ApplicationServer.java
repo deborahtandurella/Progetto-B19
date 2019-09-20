@@ -23,7 +23,7 @@ public class ApplicationServer {
         private Server server;
 
         //Create a new game session
-        public static final Sessione s = new Sessione();
+        public static Sessione s = new Sessione();
 
     /**
      * Constructor method of the server

@@ -1,21 +1,12 @@
-import com.GUI.CartellaComponent;
-import com.GUI.NumbersBoard;
-import com.GUI.controllers.StartingInterfaceController;
-import com.Game.Cartella;
-import com.Game.CartellaFactory;
+package com;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Class that setup and execute the simulation of the client.
@@ -24,7 +15,7 @@ public class Main extends Application {
 
 
     /**
-     * Main client method
+     * com.Main client method
      */
     public static void main(String[] args) {
         //Start GUI

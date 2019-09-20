@@ -3,21 +3,20 @@ package com.GUI.controllers;
 import com.GUI.CartellaComponent;
 import com.GUI.NumbersBoard;
 import com.Game.CallEnum;
-import com.Game.CartellaFactory;
-import com.Game.Cartella;
 import com.Game.controllers.GameController;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import com.Main;
 
 import java.io.File;
 import java.net.URL;
@@ -228,6 +227,18 @@ public class GameInterfaceController implements Initializable {
             if (extractions.size() > 0) {
 
                 textField.setText(logicController.getLastWinningPhrase());
+
+                if(logicController.isGameOver()){
+                    Stage primary = (Stage) textField.getScene().getWindow();
+                    primary.close();
+                    Platform.runLater( () -> {
+                        try {
+                            new Main().start( new Stage() );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
 
                 NumbersBoard numbersBoard = (NumbersBoard) anchor2.getChildren().get(0);
 

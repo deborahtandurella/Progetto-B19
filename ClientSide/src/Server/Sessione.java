@@ -36,6 +36,7 @@ public class Sessione {
     private int secondsBetweenExtractions = 4;
 
 
+
     /**
      * Constructor of the class Sessione
      */
@@ -156,6 +157,7 @@ public class Sessione {
      */
     private void addWinning(Player player, CallEnum call) {
         winnings.add(player.getUsername()+":"+call.name());
+
     }
 
     /**

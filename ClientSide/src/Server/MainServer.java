@@ -6,7 +6,7 @@ package Server;
 public class MainServer {
 
     /**
-     *Main method of the server
+     *com.Main method of the server
      */
     public static void main(String[] args) {
         try {

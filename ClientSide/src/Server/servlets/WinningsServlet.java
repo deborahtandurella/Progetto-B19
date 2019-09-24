@@ -2,6 +2,7 @@ package Server.servlets;
 
 import Server.ApplicationServer;
 import com.jsoniter.output.JsonStream;
+import org.eclipse.jetty.deploy.App;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

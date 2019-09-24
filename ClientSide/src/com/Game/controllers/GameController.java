@@ -205,6 +205,11 @@ public class GameController {
 
         //Set and initialize the extractor
 		estrattore = new Thread(() -> {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			extract(updateFunction);
 		});
 

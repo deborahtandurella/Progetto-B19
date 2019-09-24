@@ -30,7 +30,7 @@ public class Sessione {
     private Thread extractor;
 
     //Time(in seconds) before the beginning of the extraction
-    private int secondsBeforeExtraction = 2;
+    private int secondsBeforeExtraction = 5;
 
     //Time(in seconds) between the extractions of numbers
     private int secondsBetweenExtractions = 4;

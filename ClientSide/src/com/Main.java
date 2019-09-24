@@ -32,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //Load and start the main menu
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/StartingInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/StartingInterface.fxml"));
 
 
         Parent parent = loader.load();
